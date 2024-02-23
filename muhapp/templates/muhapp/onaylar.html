@@ -4,12 +4,22 @@
 <h3>onatlar</h3>
 
 
-<!-- burdaki slaslar cok onemli          /upload/        -->
-<form action="/upload/" method="POST" class="dropzone" id="my-awesome-dropzone">
-    {% csrf_token %}
-    <div class="fallback">
-        <input name="file" type="file" multiple>
-    </div>
+<!-- burdaki slaslar cok onemli          /onaylar/        -->
+<form action="/onaylar/" method="POST" class="dropzone" id="my-awesome-dropzone">
+  {% csrf_token %}
+  <div class="fallback">
+      <input name="file" type="file" multiple>
+  </div>
 </form>
+
+
+<!--onaylari listeleme-->
+<h3>Yüklenen Dosyalar</h3>
+  <ul>
+    {% for file in files %}
+      <li><a href="{{ file.file.url }}" target="_blank">{{ file.file.name }}</a></li>
+     
+    {% endfor %}
+  </ul>
 
 {%endblock%}
