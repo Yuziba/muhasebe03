@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse, JsonResponse,  Http404
 from django.views.generic import TemplateView   
 from . import models
@@ -30,5 +30,9 @@ def onay_list_view(request):
     files = models.OnayUploadedModel.objects.all()  # models.py'deki modele göre
     return render(request, 'muhapp/onaylar.html', {'files': files})   
 
-
+#------------------------------------------------------------------------------------------------------- Onay belgelerini sayfadan silme 
+def onay_delete_view(request, file_id):
+    file_to_delete = get_object_or_404(models.OnayUploadedModel, id=file_id)
+    file_to_delete.delete()
+    return redirect('muhapp:onay_list')
 
