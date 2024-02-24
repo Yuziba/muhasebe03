@@ -2,25 +2,33 @@
 
 {%block content%}
 <div class="container">
-  <div style="text-align:center;"><h3>Onay Belgeleri</h3></div>
+  <div style="text-align:center;"><h3>Onay Belgeleri</h3></div> 
   <!---- burdaki slaslar cok onemli------ /onaylar/ ------>
   <form action="/onay_upload/" method="POST" class="dropzone" id="my-awesome-dropzone">
     {% csrf_token %}
+    <!--
+      Bu HTML kodu, bir Dropzone alanı için yedek (fallback) içeriği temsil eder. Dropzone, 
+      JavaScript tabanlı bir dosya yükleme kütüphanesidir ve kullanıcıya dosyalarını sürükleyip 
+      bırakarak veya tıklayarak yüklemelerine olanak tanır. Ancak, tarayıcıda JavaScript devre 
+      dışı bırakılmışsa veya desteklenmiyorsa, bu yedek içerik devreye girer.
+    -->
     <div class="fallback">
-        <input name="file" type="file" multiple>
+      <input name="file" type="file" multiple>
     </div>
-  </form>
 
-  <!--onaylari listeleme-->
-  <h3>Yüklenen Dosyalar</h3>
-  <ul>
+  <!---------------------------------------------------------------------------------------------------------onaylari listeleme-->
+  <h6>Bu kisimda sutun basliklari olabili veya siralama yapmak icin bir buton</h6>
+  
     {% for file in files %}
-      <li><a href="{{ file.file.url }}" target="_blank">{{ file.file.name }}</a></li>
-      <a href="{% url 'muhapp:onay_delete' file.id %}">Sil</a>
+    <div class="card" style="margin: 5px;">
+      <div class="card-header" style="display: flex; align-items: center; ">
+        <div class="" style="width: 90%; "><span class="dosya-label">{{ file.file.name }}</span></div>
+        <div class="" style="padding-left:5px; text-align: right;"><a href="{% url 'muhapp:onay_delete' file.id %}">Sil</a></div>
+        <div class="" style="padding-left:5px; text-align: right;"><a href="{% url 'muhapp:onay_download' file_id=file.id %}">Dosyayı İndir</a></div>
+      </div>
+    </div>
     {% endfor %}
-  </ul>
-
+  
+</form>
 </div>
-
-
 {%endblock%}
