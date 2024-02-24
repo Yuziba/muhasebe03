@@ -55,7 +55,13 @@ def onay_download_view(request, file_id):
         raise Http404("Belirtilen dosya bulunamadı.")
 
 
-#------------------------------------------------------------------------------------------------------------- Kayit Defterleri sayfasi
+#------------------------------------------------------------------------------------------------------------- Kayit Defterleri 1. sayfasi
 class Belge_Kayit_View(TemplateView):
     template_name = 'muhapp/defterler.html'
+
+#------------------------------------------------------------------------------------------------------------- Onay Kayit Defteri sayfasi
+class Onay_Kayit_View(TemplateView):
+    template_name = 'muhapp/defter_onay.html'
+
+
 

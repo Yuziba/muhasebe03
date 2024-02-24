@@ -2,31 +2,40 @@
 
 {%block content%}
 <div class="container">
-    <h3>Belge Kayit</h3>
+    <h3 style="padding-bottom: 20px; text-align:center">Belge Kayit</h3>
 
-    <div style="padding-bottom: 10px;">
-        <div class="card" >
-            <div class="card-header"><a href="">defter 1</a></div>
-        </div>
+    <div style="padding-bottom: 5px;">
+        <a href="{% url 'muhapp:defter_onay' %}" style="width: 100%;">
+            <button style="width: 100%;" type="button" class="btn btn-outline-primary">
+                Onay Belgesi Kayit Defteri
+            </button>
+        </a>
     </div>
 
-    <div style="padding-bottom: 10px;">
-        <div class="card" >
-            <div class="card-header"><a href="">defter 2</a></div>
-        </div>
+    <div style="padding-bottom: 5px;">
+        <a href="{% url 'muhapp:main' %}" style="width: 100%;">
+            <button style="width: 100%;" type="button" class="btn btn-outline-danger">
+                Ziraat Bankasi Talimat Kayit Defteri
+            </button>
+        </a>
     </div>
 
-    <div style="padding-bottom: 10px;">
-        <div class="card" >
-            <div class="card-header"><a href="">defter 3</a></div>
-        </div>
+    <div style="padding-bottom: 5px;">
+        <a href="{% url 'muhapp:main' %}" style="width: 100%;">
+            <button style="width: 100%;" type="button" class="btn btn-outline-warning">
+                DemirBank Talimat Kayit Defteri - Duz
+            </button>
+        </a>
     </div>
 
-    <div style="padding-bottom: 10px;">
-        <div class="card" >
-            <div class="card-header"><a href="">defter 4</a></div>
-        </div>
+    <div style="padding-bottom: 5px;">
+        <a href="{% url 'muhapp:main' %}" style="width: 100%;">
+            <button style="width: 100%;" type="button" class="btn btn-outline-dark">
+                DemirBank Talimat Kayit Defteri - Yarim Format
+            </button>
+        </a>
     </div>
+    
 
 </div>
 
