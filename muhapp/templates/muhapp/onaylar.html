@@ -1,25 +1,26 @@
 {% extends "base.html" %}
 
 {%block content%}
-<h3>onatlar</h3>
+<div class="container">
+  <div style="text-align:center;"><h3>Onay Belgeleri</h3></div>
+  <!---- burdaki slaslar cok onemli------ /onaylar/ ------>
+  <form action="/onay_upload/" method="POST" class="dropzone" id="my-awesome-dropzone">
+    {% csrf_token %}
+    <div class="fallback">
+        <input name="file" type="file" multiple>
+    </div>
+  </form>
 
-
-<!-- burdaki slaslar cok onemli          /onaylar/        -->
-<form action="/onaylar/" method="POST" class="dropzone" id="my-awesome-dropzone">
-  {% csrf_token %}
-  <div class="fallback">
-      <input name="file" type="file" multiple>
-  </div>
-</form>
-
-
-<!--onaylari listeleme-->
-<h3>Yüklenen Dosyalar</h3>
+  <!--onaylari listeleme-->
+  <h3>Yüklenen Dosyalar</h3>
   <ul>
     {% for file in files %}
       <li><a href="{{ file.file.url }}" target="_blank">{{ file.file.name }}</a></li>
-     
+    
     {% endfor %}
   </ul>
+
+</div>
+
 
 {%endblock%}

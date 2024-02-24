@@ -16,7 +16,7 @@ def onay_upload_view(request):
             new_file = models.OnayUploadedModel(file=uploaded_file)
             new_file.save()
 
-            # Başarılı yanıt
+            
             return JsonResponse({'message': 'Dosya başarıyla yüklendi.'}, status=200)
         else:
             # Dosya yüklenmediğinde hata yanıtı
