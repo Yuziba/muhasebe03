@@ -8,17 +8,17 @@ from django.views.generic import TemplateView
 from . import models
 import mimetypes
 
-#--------------------------------------------------------------------------------------------------------------------------- Ana Sayfa 
+#-------------------------------------------------------------------------------------------------------------------------- Ana Sayfa 
 class MainView(TemplateView):
     template_name = 'muhapp/main.html'
 
-#--------------------------------------------------------------------------------------------------------------------------- SignUp
+#---------------------------------------------------------------------------------------------------------------------------- SignUp
 class SignUpView(CreateView):
     form_class = UserCreationForm
     success_url = reverse_lazy("login")
     template_name = "registration/signup.html"
 
-#------------------------------------------------------------------------------------------------------------------- Onay Yukleme View 
+#----------------------------------------------------------------------------------------------------------------- Onay Yukleme View 
 def onay_upload_view(request):
     if request.method == 'POST':
         uploaded_file = request.FILES.get('file')
@@ -41,13 +41,13 @@ def onay_list_view(request):
     files = models.OnayUploadedModel.objects.all()  # models.py'deki modele göre
     return render(request, 'muhapp/onaylar.html', {'files': files})   
 
-#------------------------------------------------------------------------------------------------------- Onay belgelerini sayfadan silme 
+#----------------------------------------------------------------------------------------------------- Onay belgelerini sayfadan silme 
 def onay_delete_view(request, file_id):
     file_to_delete = get_object_or_404(models.OnayUploadedModel, id=file_id)
     file_to_delete.delete()
     return redirect('muhapp:onay_list')
 
-#----------------------------------------------------------------------------------------------------------------- Onay belgele indirme
+#--------------------------------------------------------------------------------------------------------------- Onay belgele indirme
 def onay_download_view(request, file_id):
     file_instance = get_object_or_404(models.OnayUploadedModel, id=file_id)
     file_path = file_instance.file.path
@@ -65,23 +65,23 @@ def onay_download_view(request, file_id):
         raise Http404("Belirtilen dosya bulunamadı.")
 
 
-#------------------------------------------------------------------------------------------------------------- Kayit Defterleri 1. sayfasi
+#---------------------------------------------------------------------------------------------------------- Kayit Defterleri 1. sayfasi
 class Belge_Kayit_View(TemplateView):
     template_name = 'muhapp/defterler.html'
 
-#------------------------------------------------------------------------------------------------------------- Onay Kayit Defteri sayfasi
+#----------------------------------------------------------------------------------------------------------- Onay Kayit Defteri sayfasi
 class Onay_Kayit_View(TemplateView):
     template_name = 'muhapp/defter_onay_list.html'
 
-#------------------------------------------------------------------------------------------- Ziraat Bankasi Talimat Kayit Defteri sayfasi
+#----------------------------------------------------------------------------------------- Ziraat Bankasi Talimat Kayit Defteri sayfasi
 class Ziraat_Kayit_View(TemplateView):
     template_name = 'muhapp/defter_ziraat.html'
 
-#-------------------------------------------------------------------------------------------- Demirbank Talimat Duz Kayit Defteri sayfasi
+#------------------------------------------------------------------------------------------ Demirbank Talimat Duz Kayit Defteri sayfasi
 class Demir_Duz_Kayit_View(TemplateView):
     template_name = 'muhapp/defter_dbank_duz.html'
 
-#--------------------------------------------------------------------------------------------- Demirbank Talimat YF Kayit Defteri sayfasi
+#------------------------------------------------------------------------------------------- Demirbank Talimat YF Kayit Defteri sayfasi
 class Demir_YF_Kayit_View(TemplateView):
     template_name = 'muhapp/defter_dbank_yf.html'
 
@@ -90,10 +90,19 @@ class Register_Onay_View(TemplateView):
     template_name = 'muhapp/register_onay.html'
 
 
-#--------------------------------------------------------------------------------------------- Onay Defter Kayit Defteri (New Window)
-    
+#--------------------------------------------------------------------------------- Onay Defteri sayfasinda bilgileri gostermek icin
+def defter_onay_list_view(request):
+    list_onay_bilgiler = models.OnayRegisterModel.objects.all()
+    list_onay_bilgiler = {"list_onay_bilgiler":list_onay_bilgiler}
+
+    print("Buda olduuuuuuuuuuuu")
+    return render(request, 'muhapp/defter_onay_list.html', context=list_onay_bilgiler)
+    #return render(request, 'muhapp/defter_onay_list.html', {'onay_bilgiler': onay_bilgiler})
+
+#----------------------------------------------------------------------------------------------- Onay Defter Kayit Defteri (New Window)
 def register_onay_dataBase_kayit(request):
     if request.method == 'POST':
+        print("view olduuuuuuuuuuuu")
         onay_no         = request.POST.get("onay_no", "")
         onay_aciklama   = request.POST.get("onay_aciklama", "")
         onay_tarih      = request.POST.get("onay_tarih", "")
@@ -108,7 +117,14 @@ def register_onay_dataBase_kayit(request):
                                                 onay_odemetutar =onay_odemetutar, 
                                                 onay_parabirimi = onay_parabirimi,
                                                 onay_odemeyolu  =onay_odemeyolu,)
-        return redirect(reverse('muhapp:defter_onay_list'))
+        return redirect(reverse('muhapp:list_onay_bilgiler'))
     else:
         return render(request, 'muhapp/main.html')
+
+
+
+
+
+
+
 

@@ -11,7 +11,9 @@ urlpatterns = [
     path('defter_dbank_duz', views.Demir_Duz_Kayit_View.as_view(), name="defter_dbank_duz"),#Demir Belgesi Defteri sayfasi
     path('defter_dbank_yf', views.Demir_YF_Kayit_View.as_view(), name="defter_dbank_yf"),   #Demir Belgesi Defteri sayfasi
     path('register_onay', views.Register_Onay_View.as_view(), name="register_onay"),        #register_onay sayfasi
-    path('signup/', views.SignUpView.as_view(), name='signup'),    
+    path('signup/', views.SignUpView.as_view(), name='signup'), 
+
+    path('list_onay_bilgiler', views.defter_onay_list_view, name="list_onay_bilgiler"),  
     
     path('onay_upload/', views.onay_upload_view, name="onay_upload"),
     path('onay_list/', views.onay_list_view, name='onay_list'),
