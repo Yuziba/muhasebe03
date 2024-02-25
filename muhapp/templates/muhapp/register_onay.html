@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{%block content%}
+<div class="container">
+    <h3 style="padding-bottom: 20px; text-align:center">DENEME</h3>
+    
+    
+  <form action="{% url 'muhapp:register_onay_dataBase_kayit' %}" method="POST">
+      {% csrf_token%}
+        
+      <div class="" style="width: 100%; margin:auto;">
+        <div class="card">
+          <div class="card-header" style="text-align: center;">
+
+            <div class="onaysutun onaytar" style="text-align:left; display: flex; align-items: center; padding-bottom:10px;">
+              <label for="onaytar" class="form-label" style="width:20%; padding-right:10px;">Onay Tarihi</label>
+              <input type="text" class="form-control" id="onaytar" name="onaytar">
+            </div>
+    
+            <div class="onaysutun onayaciklama" style="text-align:left; display: flex; align-items: center; padding-bottom:10px;">
+              <label for="onayaciklama" class="form-label" style="width:20%; padding-right:10px;">Açıklama</label>
+              <input type="text" class="form-control" id="onayaciklama" name="onayaciklama">
+            </div>
+      
+            <div class="onaysutun onay_odemetutar" style="text-align:left; display: flex; align-items: center; padding-bottom:10px;">
+              <label for="onay_odemetutar" class="form-label" style="width:20%; padding-right:10px;">Ödeme Tutarı</label>
+              <input type="text" class="form-control" id="onay_odemetutar" name="onay_odemetutar">
+            </div>
+    
+            <div class="onaysutun onay_parabirimi" style="text-align:left; display: flex; align-items: center; padding-bottom:10px;">
+              <label for="onay_parabirimi" class="form-label" style="width:20%; padding-right:10px;">Para Birimi</label>
+              <input type="text" class="form-control" id="onay_parabirimi" name="onay_parabirimi">
+            </div>
+    
+            <div class="onaysutun onay_odemeyolu" style="text-align:left; display: flex; align-items: center; padding-bottom:10px;">
+              <label for="onay_odemeyolu" class="form-label" style="width:20%; padding-right:10px;">Ödeme Yolu</label>
+              <input type="text" class="form-control" id="onay_odemeyolu" name="onay_odemeyolu">
+            </div>
+    
+            <!--belge no olarak ele alindi ama database de degsitirilmedi-->
+            <div class="onaysutun onayno" style="text-align:left; display: flex; align-items: center; padding-bottom:10px;">
+              <label for="onayno" class="form-label" style="width:20%; padding-right:10px;"> SGB Belge No</label>
+              <input type="text" class="form-control" id="onayno" name="onayno">
+            </div>
+    
+            <div style="width: 100%; display:flex"> 
+                <button type="submit" class="btn btn-primary btn-sm" style="width: 40%; margin:auto">Kaydet</button>
+            </div>
+
+          </div>
+        </div>
+      </div>
+  </form>
+
+</div>
+
+
+{%endblock%}

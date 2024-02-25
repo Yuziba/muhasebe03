@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+
+{%block content%}
+<div class="container">
+    <h3 style="padding-bottom: 20px; text-align:center">Onay Belgesi</h3>
+
+    <button id="openNewWindowButton">Open New Window</button>
+    <script>
+        $(document).ready(function() {
+            $("#openNewWindowButton").click(function() {
+                // Yeni pencere açma işlemi
+                var newWindow = window.open('{% url 'muhapp:register_onay' %}', '_blank', 'height=auto,width=auto');
+                if (newWindow) {
+                    var screenWidth = window.screen.width;
+                    var screenHeight = window.screen.height;
+    
+                    var windowWidth = 800;
+                    var windowHeight = 500;
+    
+                    var left = (screenWidth - windowWidth) / 2;
+                    var top = (screenHeight - windowHeight) / 2;
+    
+                    newWindow.moveTo(left, top);
+                }
+            });
+        });
+    </script>
+    <div class="" style="width: 100%; margin:auto">
+        <div class="card">
+            <div class="card-header" style="text-align: center;">
+                <div class="" style="display: flex;">
+                    <div class="" style="width: 3%;"><h6>Sıra</h6></div>
+                    <div class="" style="width: 6%;"><h6>Tarih</h6></div>
+                    <div class="" style="width: 61%;"><h6>Açıklama</h6></div>
+                    <div class="" style="width: 11%;"><h6>Ödenecek Tutar</h6></div>
+                    <div class="" style="width: 4%;"><h6>Birim</h6></div>
+                    <div class="" style="width: 6%;"><h6>Ödeme Yolu</h6></div>
+                    <div class="" style="width: 9%;"><h6>SGB Belge No</h6></div>
+                    <div class="" style="width: 3%;"><h6>Yazar</h6></div>
+        
+                </div>
+            </div>
+        </div>
+    </div>
+<!---------------------------------------------------------------------------------------------- Listeleme Tablosu--> 
+    <div class="" style="width: 100%; margin:auto">
+        {%for bilgi in onayBilgiler%}
+            <div class="card">
+                <div class="min-height-div" style="display: flex; text-align:center; align-items: center;"> <!--height:60px;  uygun gibi-->
+                    <div class="" style="width: 3%; border-right: 1px solid #000;">{{forloop.counter}}</div>
+                    <div class="" style="width: 6%; border-right: 1px solid #000;">{{bilgi.onay_tarih}}</div> 
+                    <div class="" style="width: 61%; border-right: 1px solid #000;">{{bilgi.onay_aciklama}}</div> 
+                    <div class="" style="width: 11%; border-right: 1px solid #000;">{{bilgi.onay_odemetutar}}</div>
+                    <div class="" style="width: 4%; border-right: 1px solid #000;">{{bilgi.onay_parabirimi}}</div>
+                    <div class="" style="width: 6%; border-right: 1px solid #000;">{{bilgi.onay_odemeyolu}}</div>
+                    <div class="" style="width: 9%;">{{bilgi.onay_no}}</div> <!--belge no-->
+                    <div style="display:flex; flex-direction: column;">
+                        {{bilgi.username}}
+                        <!--buraya silme butin-->
+                    </div>
+                </div>
+                    
+                    
+            </div>
+        {%endfor%}
+    </div>
+
+
+    
+
+
+
+</div>
+{%endblock%}

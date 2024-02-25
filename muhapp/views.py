@@ -1,4 +1,8 @@
 from django.shortcuts import render, redirect, get_object_or_404
+from django.urls import reverse, reverse_lazy
+from django.contrib.auth.forms import UserCreationForm
+from django.views.generic import CreateView
+from django.contrib.auth.models import User
 from django.http import HttpResponse, JsonResponse,  Http404
 from django.views.generic import TemplateView   
 from . import models
@@ -7,6 +11,12 @@ import mimetypes
 #--------------------------------------------------------------------------------------------------------------------------- Ana Sayfa 
 class MainView(TemplateView):
     template_name = 'muhapp/main.html'
+
+#--------------------------------------------------------------------------------------------------------------------------- SignUp
+class SignUpView(CreateView):
+    form_class = UserCreationForm
+    success_url = reverse_lazy("login")
+    template_name = "registration/signup.html"
 
 #------------------------------------------------------------------------------------------------------------------- Onay Yukleme View 
 def onay_upload_view(request):
@@ -61,7 +71,44 @@ class Belge_Kayit_View(TemplateView):
 
 #------------------------------------------------------------------------------------------------------------- Onay Kayit Defteri sayfasi
 class Onay_Kayit_View(TemplateView):
-    template_name = 'muhapp/defter_onay.html'
+    template_name = 'muhapp/defter_onay_list.html'
+
+#------------------------------------------------------------------------------------------- Ziraat Bankasi Talimat Kayit Defteri sayfasi
+class Ziraat_Kayit_View(TemplateView):
+    template_name = 'muhapp/defter_ziraat.html'
+
+#-------------------------------------------------------------------------------------------- Demirbank Talimat Duz Kayit Defteri sayfasi
+class Demir_Duz_Kayit_View(TemplateView):
+    template_name = 'muhapp/defter_dbank_duz.html'
+
+#--------------------------------------------------------------------------------------------- Demirbank Talimat YF Kayit Defteri sayfasi
+class Demir_YF_Kayit_View(TemplateView):
+    template_name = 'muhapp/defter_dbank_yf.html'
+
+#--------------------------------------------------------------------------------------- Onay Defter Kayit Defteri (New Window) sayfasi
+class Register_Onay_View(TemplateView):
+    template_name = 'muhapp/register_onay.html'
 
 
+#--------------------------------------------------------------------------------------------- Onay Defter Kayit Defteri (New Window)
+    
+def register_onay_dataBase_kayit(request):
+    if request.method == 'POST':
+        onay_no         = request.POST.get("onay_no", "")
+        onay_aciklama   = request.POST.get("onay_aciklama", "")
+        onay_tarih      = request.POST.get("onay_tarih", "")
+        onay_odemetutar = request.POST.get("onay_odemetutar", "")
+        onay_parabirimi = request.POST.get("onay_parabirimi", "")
+        onay_odemeyolu  = request.POST.get("onay_odemeyolu", "")
+        # Bu bilgileri veritabanına kaydet
+        models.OnayRegisterModel.objects.create(username        =request.user, 
+                                                onay_no         =onay_no, 
+                                                onay_aciklama   =onay_aciklama, 
+                                                onay_tarih      =onay_tarih, 
+                                                onay_odemetutar =onay_odemetutar, 
+                                                onay_parabirimi = onay_parabirimi,
+                                                onay_odemeyolu  =onay_odemeyolu,)
+        return redirect(reverse('muhapp:defter_onay_list'))
+    else:
+        return render(request, 'muhapp/main.html')
 

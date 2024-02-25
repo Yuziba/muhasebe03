@@ -124,6 +124,9 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+# Bu kodlarin nedeni : login isleminden sonra anayayfaya yonlendirmel. aski halde profil sayfasina gitmeye calisir
+LOGIN_URL = ""
+LOGIN_REDIRECT_URL = "/"
 
 
 MEDIA_URL = '/media/'   

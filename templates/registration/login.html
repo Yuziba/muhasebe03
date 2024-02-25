@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block content%}
+    {% if user.is_authenticated %}
+        <h2>Welcome {{user.username}}</h2>
+    {% else %}
+        <form method="POST" action="{% url 'login' %}">
+            {%csrf_token%}
+            <!-- bu kismi asagidaki gibi duzenledik
+            {{form}}
+            -->
+            <div class="container" style="width: 50%;">
+                {% for field in form %}
+                    <div class="card" style="padding: 10px;">
+                        <div class="card-header">
+                            {{field.label_tag}} {{field}}
+                            
+                        </div>
+                        <div class="card-body">
+                            
+                        </div>
+                    </div>
+                {% endfor%}
+                <div style="width: 50%; margin:auto"><button type="submit" class="btn btn-primary" style="width: 100%; margin-top:10px">Send</button></div>
+            </div>
+        </form>
+    {% endif %}
+{%endblock%}
