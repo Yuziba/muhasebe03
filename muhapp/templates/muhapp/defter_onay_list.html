@@ -1,8 +1,8 @@
 {% extends "base.html" %}
 
 {%block content%}
-<div class="container">
-    <h3 style="padding-bottom: 20px; text-align:center">Onay Belgesi</h3>
+<div class="container" style="padding-bottom: 50px;">
+    <h3 style="padding-bottom: 20px; text-align:center">Onay Belgesi2</h3>
 
     <button id="openNewWindowButton">Open New Window</button>
     <script>
@@ -64,28 +64,7 @@
             </div>
         {%endfor%}
 
-        <!-- Diğer HTML kodları... -->
-
-<div class="" style="width: 100%; margin:auto">
-    {% for bilgi in onay_bilgiler %}
-        <!-- Bilgileri ekrana bas -->
-        <div class="card">
-            <div class="min-height-div" style="display: flex; text-align:center; align-items: center;">
-                <!-- Gerekli alanları burada kullan -->
-                <div class="" style="width: 6%;">{{ bilgi.onay_tarih }}</div>
-                <div class="" style="width: 61%;">{{ bilgi.onay_aciklama }}</div>
-                <!-- Diğer alanları da aynı şekilde kullan... -->
-            </div>
-        </div>
-    {% endfor %}
-</div>
-
-<!-- Diğer HTML kodları... -->
-
-    </div>
-
-
-    
+        
 
 
 

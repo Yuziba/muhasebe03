@@ -17,8 +17,7 @@ class OnayRegisterModel(models.Model):
     onay_odemetutar = models.CharField(max_length = 20)
     onay_parabirimi = models.CharField(max_length = 20)
     onay_odemeyolu = models.CharField(max_length = 20)
-
     def __str__(self):
-        return f"Tweet nick: {self.username} Belgeno: {self.onay_no} Aciklama: {self.onay_aciklama} Tarih: {self.onay_tarih} Odeme Tutrari: {self.onay_odemetutar} Para Birimi: {self.onay_parabirimi} Odeme youlu: {self.onay_odemeyolu}"
+        return f"kullanici+ {self.username} Belgeno+: {self.onay_no} Aciklama+: {self.onay_aciklama} Tarih+: {self.onay_tarih} Odeme Tutrari+: {self.onay_odemetutar} Para Birimi+: {self.onay_parabirimi} Odeme yolu+: {self.onay_odemeyolu}"
 
 

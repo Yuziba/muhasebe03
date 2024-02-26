@@ -94,21 +94,19 @@ class Register_Onay_View(TemplateView):
 def defter_onay_list_view(request):
     list_onay_bilgiler = models.OnayRegisterModel.objects.all()
     list_onay_bilgiler = {"list_onay_bilgiler":list_onay_bilgiler}
-
-    print("Buda olduuuuuuuuuuuu")
     return render(request, 'muhapp/defter_onay_list.html', context=list_onay_bilgiler)
     #return render(request, 'muhapp/defter_onay_list.html', {'onay_bilgiler': onay_bilgiler})
 
 #----------------------------------------------------------------------------------------------- Onay Defter Kayit Defteri (New Window)
 def register_onay_dataBase_kayit(request):
     if request.method == 'POST':
-        print("view olduuuuuuuuuuuu")
         onay_no         = request.POST.get("onay_no", "")
         onay_aciklama   = request.POST.get("onay_aciklama", "")
         onay_tarih      = request.POST.get("onay_tarih", "")
         onay_odemetutar = request.POST.get("onay_odemetutar", "")
         onay_parabirimi = request.POST.get("onay_parabirimi", "")
         onay_odemeyolu  = request.POST.get("onay_odemeyolu", "")
+        #print("--------------" ,onay_no, onay_aciklama, onay_tarih, onay_odemetutar, onay_parabirimi, onay_odemeyolu )
         # Bu bilgileri veritabanına kaydet
         models.OnayRegisterModel.objects.create(username        =request.user, 
                                                 onay_no         =onay_no, 
@@ -120,7 +118,6 @@ def register_onay_dataBase_kayit(request):
         return redirect(reverse('muhapp:list_onay_bilgiler'))
     else:
         return render(request, 'muhapp/main.html')
-
 
 
 
