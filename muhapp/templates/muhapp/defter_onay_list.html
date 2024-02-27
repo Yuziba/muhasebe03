@@ -9,22 +9,24 @@
         $(document).ready(function() {
             $("#openNewWindowButton").click(function() {
                 // Yeni pencere açma işlemi
-                var newWindow = window.open('{% url 'muhapp:register_onay' %}', '_blank', 'height=auto,width=auto');
+                
+                var screenWidth = window.screen.width;
+                var screenHeight = window.screen.height;
+                var windowWidth = Math.round(screenWidth * 0.9);
+                var windowHeight = Math.round(screenHeight * 0.9);
+    
+                var left = Math.round((screenWidth - windowWidth) / 2);
+                var top = Math.round((screenHeight - windowHeight) / 2);
+    
+                var newWindow = window.open('{% url 'muhapp:register_onay' %}', '_blank', 'height=' + windowHeight + ', width=' + windowWidth);
+    
                 if (newWindow) {
-                    var screenWidth = window.screen.width;
-                    var screenHeight = window.screen.height;
-    
-                    var windowWidth = 800;
-                    var windowHeight = 500;
-    
-                    var left = (screenWidth - windowWidth) / 2;
-                    var top = (screenHeight - windowHeight) / 2;
-    
                     newWindow.moveTo(left, top);
                 }
             });
         });
     </script>
+    
     <div class="" style="width: 100%; margin:auto">
         <div class="card">
             <div class="card-header" style="text-align: center;">
