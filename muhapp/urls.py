@@ -14,7 +14,8 @@ urlpatterns = [
     path('signup/', views.SignUpView.as_view(), name='signup'), 
 
     path('list_onay_bilgiler', views.defter_onay_list_view, name="list_onay_bilgiler"),  
-    
+    path('onay_list_delete/<int:id>',views.onay_list_delete_view, name="onay_list_delete"), #burda id almamiz gerek
+
     path('onay_upload/', views.onay_upload_view, name="onay_upload"),
     path('onay_list/', views.onay_list_view, name='onay_list'),
     path('onay_delete/<int:file_id>/', views.onay_delete_view, name='onay_delete'),

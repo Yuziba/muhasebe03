@@ -7,6 +7,7 @@ from django.http import HttpResponse, JsonResponse,  Http404
 from django.views.generic import TemplateView   
 from . import models
 import mimetypes
+from django.contrib.auth.decorators import login_required
 
 #-------------------------------------------------------------------------------------------------------------------------- Ana Sayfa 
 class MainView(TemplateView):
@@ -90,7 +91,7 @@ class Register_Onay_View(TemplateView):
     template_name = 'muhapp/register_onay.html'
 
 
-#--------------------------------------------------------------------------------- Onay Defteri sayfasinda bilgileri gostermek icin
+#----------------------------------------------------------------------------------- Onay Defteri sayfasinda bilgileri gostermek icin
 def defter_onay_list_view(request):
     list_onay_bilgiler = models.OnayRegisterModel.objects.all()
     list_onay_bilgiler = {"list_onay_bilgiler":list_onay_bilgiler}
@@ -106,7 +107,6 @@ def register_onay_dataBase_kayit(request):
         onay_odemetutar = request.POST.get("onay_odemetutar", "")
         onay_parabirimi = request.POST.get("onay_parabirimi", "")
         onay_odemeyolu  = request.POST.get("onay_odemeyolu", "")
-        #print("--------------" ,onay_no, onay_aciklama, onay_tarih, onay_odemetutar, onay_parabirimi, onay_odemeyolu )
         # Bu bilgileri veritabanına kaydet
         models.OnayRegisterModel.objects.create(username        =request.user, 
                                                 onay_no         =onay_no, 
@@ -119,7 +119,13 @@ def register_onay_dataBase_kayit(request):
     else:
         return render(request, 'muhapp/main.html')
 
-
+#--------------------------------------------------------------------------------------------------- Onay Defter Kayit silme
+@login_required
+def onay_list_delete_view(request, id):
+    onay_bilgi = models.OnayRegisterModel.objects.get(pk=id)
+    if request.user == onay_bilgi.username:                      #kontrol
+        models.OnayRegisterModel.objects.filter(id=id).delete() #silme kodu
+        return redirect('muhapp:main')                 #yonlendirme *ayni sayfa
 
 
 

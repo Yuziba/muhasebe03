@@ -2,9 +2,9 @@
 
 {%block content%}
 <div class="container" style="padding-bottom: 50px;">
-    <h3 style="padding-bottom: 20px; text-align:center">Onay Belgesi2</h3>
+    <h3 style="padding-bottom: 20px; text-align:center">Onay Belgesi Kayıt</h3>
 
-    <button id="openNewWindowButton">Open New Window</button>
+    <button id="openNewWindowButton">Yeni Kayıt Oluştur</button>
     <script>
         $(document).ready(function() {
             $("#openNewWindowButton").click(function() {
@@ -56,7 +56,7 @@
                     <div class="" style="width: 9%;">{{bilgi.onay_no}}</div> <!--belge no-->
                     <div style="display:flex; flex-direction: column;">
                         {{bilgi.username}}
-                        <!--buraya silme butin-->
+                        <a href="{% url 'muhapp:onay_list_delete' id=bilgi.id %}" class="btn btn-danger btn-sm">Sil</a>
                     </div>
                 </div>
                     
