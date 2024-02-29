@@ -6,14 +6,14 @@ app_name = 'muhapp'
 urlpatterns = [
     path('', views.MainView.as_view(), name="main"),                                        #Ana Sayfa
     path('defterler/', views.Belge_Kayit_View.as_view(), name="defterler"),                 #Defterlerin Ana Sayfasi
-    path('defter_onay_list', views.Onay_Kayit_View.as_view(), name="defter_onay_list"),     #Onay Belgesi Defteri sayfasi
+    #path('defter_onay_list', views.Onay_Kayit_View.as_view(), name="defter_onay_list"),     #Onay Belgesi Defteri sayfasi
     path('defter_ziraat', views.Ziraat_Kayit_View.as_view(), name="defter_ziraat"),         #Ziraat Belgesi Defteri sayfasi
     path('defter_dbank_duz', views.Demir_Duz_Kayit_View.as_view(), name="defter_dbank_duz"),#Demir Belgesi Defteri sayfasi
     path('defter_dbank_yf', views.Demir_YF_Kayit_View.as_view(), name="defter_dbank_yf"),   #Demir Belgesi Defteri sayfasi
     path('register_onay', views.Register_Onay_View.as_view(), name="register_onay"),        #register_onay sayfasi
     path('signup/', views.SignUpView.as_view(), name='signup'), 
 
-    path('list_onay_bilgiler', views.defter_onay_list_view, name="list_onay_bilgiler"),  
+    path('defter_onay_list', views.defter_onay_list_view, name="defter_onay_list"),         # onay bilgileri listeleme
     path('onay_list_delete/<int:id>',views.onay_list_delete_view, name="onay_list_delete"), #burda id almamiz gerek
 
     path('onay_upload/', views.onay_upload_view, name="onay_upload"),

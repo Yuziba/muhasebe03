@@ -70,10 +70,6 @@ def onay_download_view(request, file_id):
 class Belge_Kayit_View(TemplateView):
     template_name = 'muhapp/defterler.html'
 
-#----------------------------------------------------------------------------------------------------------- Onay Kayit Defteri sayfasi
-class Onay_Kayit_View(TemplateView):
-    template_name = 'muhapp/defter_onay_list.html'
-
 #----------------------------------------------------------------------------------------- Ziraat Bankasi Talimat Kayit Defteri sayfasi
 class Ziraat_Kayit_View(TemplateView):
     template_name = 'muhapp/defter_ziraat.html'
@@ -93,9 +89,9 @@ class Register_Onay_View(TemplateView):
 
 #----------------------------------------------------------------------------------- Onay Defteri sayfasinda bilgileri gostermek icin
 def defter_onay_list_view(request):
-    list_onay_bilgiler = models.OnayRegisterModel.objects.all()
-    list_onay_bilgiler = {"list_onay_bilgiler":list_onay_bilgiler}
-    return render(request, 'muhapp/defter_onay_list.html', context=list_onay_bilgiler)
+    defter_onay_list = models.OnayRegisterModel.objects.all()
+    defter_onay_list = {"defter_onay_list":defter_onay_list}
+    return render(request, 'muhapp/defter_onay_list.html', context=defter_onay_list)
     #return render(request, 'muhapp/defter_onay_list.html', {'onay_bilgiler': onay_bilgiler})
 
 #----------------------------------------------------------------------------------------------- Onay Defter Kayit Defteri (New Window)
@@ -115,7 +111,7 @@ def register_onay_dataBase_kayit(request):
                                                 onay_odemetutar =onay_odemetutar, 
                                                 onay_parabirimi = onay_parabirimi,
                                                 onay_odemeyolu  =onay_odemeyolu,)
-        return redirect(reverse('muhapp:list_onay_bilgiler'))
+        return redirect(reverse('muhapp:defter_onay_list'))
     else:
         return render(request, 'muhapp/main.html')
 
@@ -125,7 +121,7 @@ def onay_list_delete_view(request, id):
     onay_bilgi = models.OnayRegisterModel.objects.get(pk=id)
     if request.user == onay_bilgi.username:                      #kontrol
         models.OnayRegisterModel.objects.filter(id=id).delete() #silme kodu
-        return redirect('muhapp:main')                 #yonlendirme *ayni sayfa
+        return redirect('muhapp:defter_onay_list')                 #yonlendirme *ayni sayfa
 
 
 
