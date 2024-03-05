@@ -22,7 +22,7 @@ urlpatterns = [
     path('onay_download/<int:file_id>/', views.onay_download_view, name='onay_download'),
     path('register_onay_dataBase_kayit', views.register_onay_dataBase_kayit, name="register_onay_dataBase_kayit"),
 
-    
+
 
 ]
 

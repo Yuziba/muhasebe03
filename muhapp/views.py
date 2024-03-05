@@ -111,9 +111,13 @@ def register_onay_dataBase_kayit(request):
                                                 onay_odemetutar =onay_odemetutar, 
                                                 onay_parabirimi = onay_parabirimi,
                                                 onay_odemeyolu  =onay_odemeyolu,)
-        return redirect(reverse('muhapp:defter_onay_list'))
+        #return redirect(reverse('muhapp:defter_onay_list'))
+        #kayit butinuna tiklandiktan sonra pencere kapatma islemi ve yenileme
+        response = HttpResponse('<script>window.close(); window.opener.location.reload();</script>')
+        return response
     else:
         return render(request, 'muhapp/main.html')
+        
 
 #--------------------------------------------------------------------------------------------------- Onay Defter Kayit silme
 @login_required
@@ -122,6 +126,7 @@ def onay_list_delete_view(request, id):
     if request.user == onay_bilgi.username:                      #kontrol
         models.OnayRegisterModel.objects.filter(id=id).delete() #silme kodu
         return redirect('muhapp:defter_onay_list')                 #yonlendirme *ayni sayfa
+
 
 
 
