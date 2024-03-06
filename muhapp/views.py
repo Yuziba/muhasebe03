@@ -112,7 +112,7 @@ def register_onay_dataBase_kayit(request):
                                                 onay_parabirimi = onay_parabirimi,
                                                 onay_odemeyolu  =onay_odemeyolu,)
         #return redirect(reverse('muhapp:defter_onay_list'))
-        #kayit butinuna tiklandiktan sonra pencere kapatma islemi ve yenileme
+        #kayit butinuna tiklandiktan sonra pencere kapatma islemi ve yenileme2
         response = HttpResponse('<script>window.close(); window.opener.location.reload();</script>')
         return response
     else:
