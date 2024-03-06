@@ -55,14 +55,14 @@
     <div class="" style="width: 100%; margin:auto">
         {%for bilgi in defter_onay_list%}
             <div class="card">
-                <div class="" style="display: flex; text-align:center; align-items: center; "> <!--height:60px;  uygun gibi-->
-                    <div class="" style="width: 3%; border-right: 1px solid #000;background-color: yellow;">{{forloop.counter}}</div>
-                    <div class="" style="width: 6%; border-right: 1px solid #000;">{{bilgi.onay_tarih}}</div> 
-                    <div class="" style="width: 61%; border-right: 1px solid #000; background-color: blue;">{{bilgi.onay_aciklama}}</div> 
-                    <div class="" style="width: 11%; border-right: 1px solid #000;">{{bilgi.onay_odemetutar}}</div>
-                    <div class="" style="width: 4%; border-right: 1px solid #000;">{{bilgi.onay_parabirimi}}</div>
-                    <div class="" style="width: 6%; border-right: 1px solid #000;">{{bilgi.onay_odemeyolu}}</div>
-                    <div class="" style="width: 9%;">{{bilgi.onay_no}}</div> <!--belge no-->
+                <div class="" style="display: flex; text-align:center; align-items: center; background-color: #f1f8fc;"> <!--height:60px;  uygun gibi-->
+                    <div class="" style=" width: 3%; background-color: #f1f8fc; padding: 6px;">{{forloop.counter}}</div>
+                    <div class="" style="width: 6%; background-color: #e6f1f7; padding: 6px; border-radius: 6px;">{{bilgi.onay_tarih}}</div> 
+                    <div class="" style="width: 61%; background-color: #f1f8fc; padding: 6px;">{{bilgi.onay_aciklama}}</div> 
+                    <div class="" style="width: 11%; background-color: #e6f1f7; padding: 6px; border-radius: 6px;">{{bilgi.onay_odemetutar}}</div>
+                    <div class="" style="width: 4%; background-color: #f1f8fc; padding: 6px;">{{bilgi.onay_parabirimi}}</div>
+                    <div class="" style="width: 6%; background-color: #e6f1f7; padding: 6px; border-radius: 6px;">{{bilgi.onay_odemeyolu}}</div>   
+                    <div class="" style="width: 9%; background-color: #f1f8fc; padding: 6px;">{{bilgi.onay_no}}</div> <!--belge no-->
                     <div style="display:flex; flex-direction: column;">
                         <div style="background-color: #fce5e5; border: 1px solid #000; border-radius: 5px;">
                             <a href="{% url 'muhapp:onay_list_delete' id=bilgi.id %}" 
@@ -83,7 +83,7 @@
                         
 
                     </div>
-                    <div class="" style="width: 6%; border-right: 1px solid #000;">{{bilgi.username}}</div>
+                    <div class="" style="width: 6%;">{{bilgi.username}}</div>
                 </div>
                     
                     
