@@ -21,8 +21,7 @@ urlpatterns = [
     path('onay_delete/<int:file_id>/', views.onay_delete_view, name='onay_delete'),
     path('onay_download/<int:file_id>/', views.onay_download_view, name='onay_download'),
     path('register_onay_dataBase_kayit', views.register_onay_dataBase_kayit, name="register_onay_dataBase_kayit"),
-
-
+    path('edit_onay_bilgi/<int:id>/', views.edit_onay_bilgi, name='edit_onay_bilgi'),
 
 ]
 

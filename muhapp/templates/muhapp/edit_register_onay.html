@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Düzenleme Sayfası</title>
+</head>
+<body>
+    <h2>Düzenleme Sayfası</h2>
+    <form method="post">
+        {% csrf_token %}
+        <label for="onay_no">Onay No:</label>
+        <input type="text" name="onay_no" value="{{ onay_bilgi.onay_no }}"><br>
+
+        <label for="onay_aciklama">Onay Açıklama:</label>
+        <input type="text" name="onay_aciklama" value="{{ onay_bilgi.onay_aciklama }}"><br>
+
+        <label for="onay_tarih">Onay Tarih:</label>
+        <input type="text" name="onay_tarih" value="{{ onay_bilgi.onay_tarih }}"><br>
+
+        <label for="onay_odemetutar">Onay Ödeme Tutar:</label>
+        <input type="text" name="onay_odemetutar" value="{{ onay_bilgi.onay_odemetutar }}"><br>
+
+        <label for="onay_parabirimi">Onay Para Birimi:</label>
+        <input type="text" name="onay_parabirimi" value="{{ onay_bilgi.onay_parabirimi }}"><br>
+
+        <label for="onay_odemeyolu">Onay Ödeme Yolu:</label>
+        <input type="text" name="onay_odemeyolu" value="{{ onay_bilgi.onay_odemeyolu }}"><br>
+
+        <button type="submit">Kaydet</button>
+    </form>
+</body>
+</html>

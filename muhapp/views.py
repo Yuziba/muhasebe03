@@ -128,7 +128,31 @@ def onay_list_delete_view(request, id):
         return redirect('muhapp:defter_onay_list')                 #yonlendirme *ayni sayfa
 
 
+#--------------------------------------------------------------------------------------------------- Onay Defter Kayit Editleme
+def edit_onay_bilgi(request, id):
+    onay_bilgi = get_object_or_404(models.OnayRegisterModel, pk=id)
 
+    if request.method == 'POST':
+        # POST verilerini al
+        onay_no = request.POST.get('onay_no')
+        onay_aciklama = request.POST.get('onay_aciklama')
+        onay_tarih = request.POST.get('onay_tarih')
+        onay_odemetutar = request.POST.get('onay_odemetutar')
+        onay_parabirimi = request.POST.get('onay_parabirimi')
+        onay_odemeyolu = request.POST.get('onay_odemeyolu')
 
+        # Modeli güncelle
+        onay_bilgi.onay_no = onay_no
+        onay_bilgi.onay_aciklama = onay_aciklama
+        onay_bilgi.onay_tarih = onay_tarih
+        onay_bilgi.onay_odemetutar = onay_odemetutar
+        onay_bilgi.onay_parabirimi = onay_parabirimi
+        onay_bilgi.onay_odemeyolu = onay_odemeyolu
+        onay_bilgi.save()
+
+        return redirect('muhapp:defter_onay_list')
+
+    return render(request, 'muhapp/edit_register_onay.html', {'onay_bilgi': onay_bilgi})
+    
 
 
