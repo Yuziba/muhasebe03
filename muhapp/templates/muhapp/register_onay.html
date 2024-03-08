@@ -26,15 +26,27 @@
             -->
             
     
+            
             <div class="onaysutun onayaciklama" style="text-align:left; display: flex; align-items: center; padding-bottom:10px;">
               <label for="onayaciklama" class="form-label" style="width:20%; padding-right:10px;">Açıklama</label>
-              <input type="text" class="form-control" id="onay_aciklama" name="onay_aciklama">
+              <input type="text" class="form-control" id="onay_aciklama" name="onay_aciklama" maxlength="110">
             </div>
+            
+
+            <!--
+              <div class="onaysutun onay_odemetutar" style="text-align:left; display: flex; align-items: center; padding-bottom:10px;">
+              <label for="onay_odemetutar" class="form-label" style="width:20%; padding-right:10px;">Ödeme Tutarı</label>
+              {% with formatted_odemetutar=onay_odemetutar|stringformat:".0f" %}
+                  <input type="text" class="form-control" id="onay_odemetutar" name="onay_odemetutar" value="{{ formatted_odemetutar|floatformat }}">
+              {% endwith %}
+          </div>
+            -->
       
             <div class="onaysutun onay_odemetutar" style="text-align:left; display: flex; align-items: center; padding-bottom:10px;">
               <label for="onay_odemetutar" class="form-label" style="width:20%; padding-right:10px;">Ödeme Tutarı</label>
-              <input type="text" class="form-control" id="onay_odemetutar" name="onay_odemetutar">
-            </div>
+              <input type="number" class="form-control" id="onay_odemetutar" name="onay_odemetutar">
+          </div>
+          
     
             <div class="onaysutun onay_parabirimi" style="text-align:left; display: flex; align-items: center; padding-bottom:10px;">
               <label for="onay_parabirimi" class="form-label" style="width:20%; padding-right:10px;">Para Birimi</label>

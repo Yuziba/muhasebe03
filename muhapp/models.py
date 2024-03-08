@@ -2,6 +2,7 @@ from datetime import datetime
 from django.db import models
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
+from django.core.validators import MaxValueValidator, MinValueValidator, MaxLengthValidator
 
 # Create your models here.
 class OnayUploadedModel(models.Model):
@@ -13,11 +14,12 @@ class OnayUploadedModel(models.Model):
 #----------------------------------------------------------------------------------- onay kayit defteri model  
 class OnayRegisterModel(models.Model):
     username = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
-    onay_no = models.CharField(max_length = 100)
-    onay_aciklama = models.CharField(max_length = 100, default='my_default_value')
+    onay_no = models.CharField(max_length = 4)
+    onay_aciklama = models.CharField(max_length = 110, default='my_default_value')
     #burda alani datefield sectik ve 'register_onay.html input olarak date yaptik. defter_onay_list.html icinde ise {{bilgi.onay_tarih|date:"d.m.Y"}} seklinde formatladik
     onay_tarih = models.DateField(auto_now_add=True) #auto_now_add ile kullanci deger girmese bile otomatik tarih atamasi yapar
-    onay_odemetutar = models.CharField(max_length = 20)
+    #onay_odemetutar = models.CharField(max_length = 20)
+    onay_odemetutar = models.IntegerField(validators=[MaxValueValidator(10000000000)])
     onay_parabirimi = models.CharField(max_length = 20)
     onay_odemeyolu = models.CharField(max_length = 20)
 
