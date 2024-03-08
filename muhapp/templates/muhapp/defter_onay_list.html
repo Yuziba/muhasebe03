@@ -56,8 +56,8 @@
         {%for bilgi in defter_onay_list%}
             <div class="card">
                 <div class="" style="display: flex; text-align:center; align-items: center; background-color: #f1f8fc;"> <!--height:60px;  uygun gibi-->
-                    <div class="" style=" width: 3%; background-color: #f1f8fc; padding: 6px;">{{forloop.counter}}</div>
-                    <div class="" style="width: 6%; background-color: #e6f1f7; padding: 6px; border-radius: 6px;">{{bilgi.onay_tarih}}</div> 
+                    <div class="" style=" width: 3%; background-color: #f1f8fc; padding: 6px;">{{forloop.counter|stringformat:"04d"}}</div>
+                    <div class="" style="width: 6%; background-color: #e6f1f7; padding: 6px; border-radius: 6px;">{{bilgi.onay_tarih|date:"d.m.Y"}}</div> 
                     <div class="" style="width: 61%; background-color: #f1f8fc; padding: 6px;">{{bilgi.onay_aciklama}}</div> 
                     <div class="" style="width: 11%; background-color: #e6f1f7; padding: 6px; border-radius: 6px;">{{bilgi.onay_odemetutar}}</div>
                     <div class="" style="width: 4%; background-color: #f1f8fc; padding: 6px;">{{bilgi.onay_parabirimi}}</div>
