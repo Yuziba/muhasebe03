@@ -5,7 +5,7 @@
     <h3 style="padding-bottom: 20px; text-align:center">DENEME</h3>
     
     
-  <form action="{% url 'muhapp:register_onay_dataBase_kayit' %}" method="POST">
+  <form action="{% url 'muhapp:register_onay_dataBase_kayit' %}" method="POST" id="onayFormsil">
       {% csrf_token%}
         
       <div class="" style="width: 100%; margin:auto;">
@@ -63,8 +63,26 @@
       </div>
       
   </form>
-
-  
+  <script>
+    document.getElementById("submitFormButton").addEventListener("click", function() {
+        var onayTarihInput = document.getElementById("onay_tarih");
+        var onayTarihValue = onayTarihInput.value;
+    
+        // Tarih formatını kontrol et
+        if (!isValidDate(onayTarihValue)) {
+            alert("Geçerli bir tarih formatı girin (YYYY-MM-DD).");
+            // Formun gönderilmesini engelle
+            event.preventDefault();
+        }
+    });
+    
+    // Tarih formatını kontrol etmek için bir yardımcı fonksiyon
+    function isValidDate(dateString) {
+        var regex = /^\d{4}-\d{2}-\d{2}$/;
+        return regex.test(dateString);
+    }
+    </script>
+    
   
 
 
