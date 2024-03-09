@@ -33,8 +33,9 @@
             });
         });
     </script>
-    
-    <div class="" style="width: 100%; margin:auto">
+<!---------------------------------------------------------------------------------------------- basliklar-->  
+    <!--
+        <div class="" style="width: 100%; margin:auto">
         <div class="card">
             <div class="card-header" style="text-align: center;">
                 <div class="" style="display: flex;">
@@ -51,19 +52,36 @@
             </div>
         </div>
     </div>
+    -->
 <!---------------------------------------------------------------------------------------------- Listeleme Tablosu--> 
-    <div class="" style="width: 100%; margin:auto">
+<div class="" style="width: 100%; margin:auto">
+<!-- ------------------------------------------------------------------------------------------- --> 
+    <div class="card">
+        <div class="" style="display: flex; text-align:center; align-items: center; background-color: #acdcf8; text-align: center; font-weight: bolder; height: 60px;"> <!--height:60px;  uygun gibi-->
+            <div class="" style="width: 3%; padding: 6px;">Sıra</div>
+            <div class="" style="width: 6%; padding: 6px; border-radius: 6px;">Tarih</div> 
+            <div class="" style="width: 56%; padding: 6px;">Açıklama</div> 
+            <div class="" style="width: 10%; padding: 6px; border-radius: 6px;">Ödenecek Tutar</div>
+            <div class="" style="width: 4%; padding: 6px;">Birim</div>
+            <div class="" style="width: 6%; padding: 6px; border-radius: 6px;">Ödeme Yolu</div>   
+            <div class="" style="width: 9%; padding: 6px;">SGB Belge No</div> <!--belge no-->
+            <div class="" style="width: 2%; display:flex; flex-direction: column;">Edit</div>
+            <div class="" style="width: 4%;">Yazar</div>
+        </div>
+    </div>
+
+<!-- ------------------------------------------------------------------------------------------- --> 
         {%for bilgi in defter_onay_list%}
             <div class="card">
                 <div class="" style="display: flex; text-align:center; align-items: center; background-color: #f1f8fc;"> <!--height:60px;  uygun gibi-->
-                    <div class="" style=" width: 3%; background-color: #f1f8fc; padding: 6px;">{{forloop.counter|stringformat:"04d"}}</div>
+                    <div class="" style="width: 3%; background-color: #f1f8fc; padding: 6px;">{{forloop.counter|stringformat:"04d"}}</div>
                     <div class="" style="width: 6%; background-color: #e6f1f7; padding: 6px; border-radius: 6px;">{{bilgi.onay_tarih|date:"d.m.Y"}}</div> 
-                    <div class="" style="width: 61%; background-color: #f1f8fc; padding: 6px;">{{bilgi.onay_aciklama}}</div> 
-                    <div class="" style="width: 11%; background-color: #e6f1f7; padding: 6px; border-radius: 6px;">{{bilgi.onay_odemetutar}}</div>
+                    <div class="" style="width: 56%; background-color: #f1f8fc; padding: 6px;">{{bilgi.onay_aciklama}}</div> 
+                    <div class="" style="width: 10%; background-color: #e6f1f7; padding: 6px; border-radius: 6px; text-align: right;">{{bilgi.onay_odemetutar}}</div>
                     <div class="" style="width: 4%; background-color: #f1f8fc; padding: 6px;">{{bilgi.onay_parabirimi}}</div>
                     <div class="" style="width: 6%; background-color: #e6f1f7; padding: 6px; border-radius: 6px;">{{bilgi.onay_odemeyolu}}</div>   
                     <div class="" style="width: 9%; background-color: #f1f8fc; padding: 6px;">{{bilgi.onay_no}}</div> <!--belge no-->
-                    <div style="display:flex; flex-direction: column;">
+                    <div class="" style="width: 2%; display:flex; flex-direction: column; align-items: center;">
                         <div style="background-color: #fce5e5; border: 1px solid #000; border-radius: 5px;">
                             <a href="{% url 'muhapp:onay_list_delete' id=bilgi.id %}" 
                                 class="btn btn-sm" 
@@ -83,7 +101,7 @@
                         
 
                     </div>
-                    <div class="" style="width: 6%;">{{bilgi.username}}</div>
+                    <div class="" style="width: 4%; font-size: 12px;">{{bilgi.username}}</div>
                 </div>
                     
                     
@@ -91,6 +109,7 @@
             
         {%endfor%}
         
+    </div>
 </div>
 {%endblock%}
 

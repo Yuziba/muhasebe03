@@ -47,6 +47,9 @@
               <input type="text" class="form-control" id="onay_odemetutar" name="onay_odemetutar">
             </div>
             
+           <!-- bu alan ilerde guncellenecek. suna sadece rakam ve virgul girilmesine izin veriyor.
+          daha sonra virgulden sonra 2 basamak olarak sinirlandirmak gerek
+        -->
             <script>
               document.getElementById("onay_odemetutar").addEventListener("input", function() {
                   var inputValue = this.value;
@@ -56,13 +59,7 @@
                       alert("Geçerli bir sayı girin.");
                       // Girdiyi sıfırla veya başka bir işlem yapabilirsiniz
                       this.value = "";
-                  } else {
-                      // sayiIntegerIse fonksiyonu ile kontrol ve düzenleme yap
-                      var formattedValue = sayiIntegerIse(inputValue);
-                      
-                      // Düzenlenmiş değeri input alanına atar
-                      this.value = formattedValue;
-                  }
+                  } 
               });
           
               // Geçerli girdi kontrolü için yardımcı fonksiyon
@@ -70,65 +67,15 @@
                   var regex = /^[0-9,]*$/; // Rakam ve virgül içermeli
                   return regex.test(value);
               }
-          
-              // Ondalık sayı kontrolü için yardımcı fonksiyon
-              function isValidDecimal(value) {
-                  // Virgülle ayrılan iki parça olmalı
-                  var parts = value.split(",");
-                  
-                  // Eğer virgül yoksa veya sadece virgül varsa false döndür
-                  if (parts.length !== 2 || parts[1].length === 0) {
-                      return false;
-                  }
-          
-                  // Birinci parça bir sayı olmalı
-                  var firstPart = parseFloat(parts[0]);
-          
-                  // Eğer birinci parça bir sayı değilse false döndür
-                  if (isNaN(firstPart)) {
-                      return false;
-                  }
-          
-                  // İkinci parça varsa en fazla iki basamaklı bir sayı olmalı
-                  if (parts[1].length > 2) {
-                      return false;
-                  }
-          
-                  return true;
-              }
-          
-              function sayiIntegerIse(value) {
-                  // Virgülle ayrılan iki parça olmalı
-                  var parts = value.split(",");
-          
-                  // Eğer virgül yoksa veya sadece virgül varsa girdiyi olduğu gibi döndür
-                  if (parts.length !== 2 || parts[1].length === 0) {
-                      return value;
-                  }
-          
-                  // Birinci parça bir sayı olmalı
-                  var firstPart = parseFloat(parts[0]);
-          
-                  // Eğer birinci parça bir sayı değilse girdiyi olduğu gibi döndür
-                  if (isNaN(firstPart)) {
-                      return value;
-                  }
-          
-                  // İkinci parça varsa en fazla iki basamaklı bir sayı olmalı
-                  if (parts[1].length > 2) {
-                      return value;
-                  }
-          
-                  // Girilen değer tam sayı ise
-                  if (Number.isInteger(firstPart)) {
-                      // Virgül ekleyerek sonuç döndür
-                      return firstPart.toFixed(0) + ",";
-                  }
-          
-                  // Girilen değer ondalık ise veya bir sayı değilse girdiyi olduğu gibi döndür
-                  return value;
-              }
           </script>
+          
+          
+          
+          
+          
+          
+          
+          
           
 <!-- --------------------------------------------------------------------------------------------------------------------------------------------------- -->          
     
@@ -145,13 +92,17 @@
 <!-- --------------------------------------------------------------------------------------------------------------------------------------------------- -->    
             <div class="onaysutun onay_odemeyolu" style="text-align:left; display: flex; align-items: center; padding-bottom:10px;">
               <label for="onay_odemeyolu" class="form-label" style="width:20%; padding-right:10px;">Ödeme Yolu</label>
-              <input type="text" class="form-control" id="onay_odemeyolu" name="onay_odemeyolu">
+              <select class="form-select" id="onay_odemeyolu" name="onay_odemeyolu">
+                <option value="Banka">Banka</option>
+                <option value="Kasa">Kasa</option>
+                <option value="Genel Olur">Genel Olur</option>
+              </select>
             </div>
 <!-- --------------------------------------------------------------------------------------------------------------------------------------------------- -->   
             <!--belge no olarak ele alindi ama database de degsitirilmedi-->
             <div class="onaysutun onayno" style="text-align:left; display: flex; align-items: center; padding-bottom:10px;">
               <label for="onayno" class="form-label" style="width:20%; padding-right:10px;"> SGB Belge No</label>
-              <input type="text" class="form-control" id="onayno" name="onay_no">
+              <input type="text" class="form-control" id="onayno" name="onay_no"> 
             </div>
     
             <div style="width: 100%; display:flex"> 
