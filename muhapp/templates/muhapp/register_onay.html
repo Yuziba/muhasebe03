@@ -11,7 +11,7 @@
       <div class="" style="width: 100%; margin:auto;">
         <div class="card">
           <div class="card-header" style="text-align: center;">
-
+<!-- --------------------------------------------------------------------------------------------------------------------------------------------------- -->
             <div class="onaysutun onaytar" style="text-align:left; display: flex; align-items: center; padding-bottom:10px;">
               <label for="onaytar" class="form-label" style="width:20%; padding-right:10px;">Onay Tarihi</label>
               <input type="date" class="form-control" id="onay_tarih" name="onay_tarih">
@@ -26,13 +26,13 @@
             -->
             
     
-            
+<!-- --------------------------------------------------------------------------------------------------------------------------------------------------- -->         
             <div class="onaysutun onayaciklama" style="text-align:left; display: flex; align-items: center; padding-bottom:10px;">
               <label for="onayaciklama" class="form-label" style="width:20%; padding-right:10px;">Açıklama</label>
               <input type="text" class="form-control" id="onay_aciklama" name="onay_aciklama" maxlength="110">
             </div>
             
-
+<!-- --------------------------------------------------------------------------------------------------------------------------------------------------- -->
             <!--
               <div class="onaysutun onay_odemetutar" style="text-align:left; display: flex; align-items: center; padding-bottom:10px;">
               <label for="onay_odemetutar" class="form-label" style="width:20%; padding-right:10px;">Ödeme Tutarı</label>
@@ -41,23 +41,113 @@
               {% endwith %}
           </div>
             -->
-      
+    
             <div class="onaysutun onay_odemetutar" style="text-align:left; display: flex; align-items: center; padding-bottom:10px;">
               <label for="onay_odemetutar" class="form-label" style="width:20%; padding-right:10px;">Ödeme Tutarı</label>
-              <input type="number" class="form-control" id="onay_odemetutar" name="onay_odemetutar">
-          </div>
-          
-    
-            <div class="onaysutun onay_parabirimi" style="text-align:left; display: flex; align-items: center; padding-bottom:10px;">
-              <label for="onay_parabirimi" class="form-label" style="width:20%; padding-right:10px;">Para Birimi</label>
-              <input type="text" class="form-control" id="onay_parabirimi" name="onay_parabirimi">
+              <input type="text" class="form-control" id="onay_odemetutar" name="onay_odemetutar">
             </div>
+            
+            <script>
+              document.getElementById("onay_odemetutar").addEventListener("input", function() {
+                  var inputValue = this.value;
+          
+                  // Girdiyi kontrol et
+                  if (!isValidInput(inputValue)) {
+                      alert("Geçerli bir sayı girin.");
+                      // Girdiyi sıfırla veya başka bir işlem yapabilirsiniz
+                      this.value = "";
+                  } else {
+                      // sayiIntegerIse fonksiyonu ile kontrol ve düzenleme yap
+                      var formattedValue = sayiIntegerIse(inputValue);
+                      
+                      // Düzenlenmiş değeri input alanına atar
+                      this.value = formattedValue;
+                  }
+              });
+          
+              // Geçerli girdi kontrolü için yardımcı fonksiyon
+              function isValidInput(value) {
+                  var regex = /^[0-9,]*$/; // Rakam ve virgül içermeli
+                  return regex.test(value);
+              }
+          
+              // Ondalık sayı kontrolü için yardımcı fonksiyon
+              function isValidDecimal(value) {
+                  // Virgülle ayrılan iki parça olmalı
+                  var parts = value.split(",");
+                  
+                  // Eğer virgül yoksa veya sadece virgül varsa false döndür
+                  if (parts.length !== 2 || parts[1].length === 0) {
+                      return false;
+                  }
+          
+                  // Birinci parça bir sayı olmalı
+                  var firstPart = parseFloat(parts[0]);
+          
+                  // Eğer birinci parça bir sayı değilse false döndür
+                  if (isNaN(firstPart)) {
+                      return false;
+                  }
+          
+                  // İkinci parça varsa en fazla iki basamaklı bir sayı olmalı
+                  if (parts[1].length > 2) {
+                      return false;
+                  }
+          
+                  return true;
+              }
+          
+              function sayiIntegerIse(value) {
+                  // Virgülle ayrılan iki parça olmalı
+                  var parts = value.split(",");
+          
+                  // Eğer virgül yoksa veya sadece virgül varsa girdiyi olduğu gibi döndür
+                  if (parts.length !== 2 || parts[1].length === 0) {
+                      return value;
+                  }
+          
+                  // Birinci parça bir sayı olmalı
+                  var firstPart = parseFloat(parts[0]);
+          
+                  // Eğer birinci parça bir sayı değilse girdiyi olduğu gibi döndür
+                  if (isNaN(firstPart)) {
+                      return value;
+                  }
+          
+                  // İkinci parça varsa en fazla iki basamaklı bir sayı olmalı
+                  if (parts[1].length > 2) {
+                      return value;
+                  }
+          
+                  // Girilen değer tam sayı ise
+                  if (Number.isInteger(firstPart)) {
+                      // Virgül ekleyerek sonuç döndür
+                      return firstPart.toFixed(0) + ",";
+                  }
+          
+                  // Girilen değer ondalık ise veya bir sayı değilse girdiyi olduğu gibi döndür
+                  return value;
+              }
+          </script>
+          
+<!-- --------------------------------------------------------------------------------------------------------------------------------------------------- -->          
     
+          <div class="onaysutun onay_parabirimi" style="text-align:left; display: flex; align-items: center; padding-bottom:10px;">
+            <label for="onay_parabirimi" class="form-label" style="width:20%; padding-right:10px;">Para Birimi</label>
+            <select class="form-select" id="onay_parabirimi" name="onay_parabirimi">
+                <option value="Som">Som</option>
+                <option value="Lira">Lira</option>
+                <option value="Dolar">Dolar</option>
+                <option value="Euro">Euro</option>
+            </select>
+        </div>
+        
+<!-- --------------------------------------------------------------------------------------------------------------------------------------------------- -->    
             <div class="onaysutun onay_odemeyolu" style="text-align:left; display: flex; align-items: center; padding-bottom:10px;">
               <label for="onay_odemeyolu" class="form-label" style="width:20%; padding-right:10px;">Ödeme Yolu</label>
               <input type="text" class="form-control" id="onay_odemeyolu" name="onay_odemeyolu">
             </div>
-    
+<!-- --------------------------------------------------------------------------------------------------------------------------------------------------- -->   
             <!--belge no olarak ele alindi ama database de degsitirilmedi-->
             <div class="onaysutun onayno" style="text-align:left; display: flex; align-items: center; padding-bottom:10px;">
               <label for="onayno" class="form-label" style="width:20%; padding-right:10px;"> SGB Belge No</label>

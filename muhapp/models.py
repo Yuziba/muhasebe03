@@ -18,8 +18,8 @@ class OnayRegisterModel(models.Model):
     onay_aciklama = models.CharField(max_length = 110, default='my_default_value')
     #burda alani datefield sectik ve 'register_onay.html input olarak date yaptik. defter_onay_list.html icinde ise {{bilgi.onay_tarih|date:"d.m.Y"}} seklinde formatladik
     onay_tarih = models.DateField(auto_now_add=True) #auto_now_add ile kullanci deger girmese bile otomatik tarih atamasi yapar
-    #onay_odemetutar = models.CharField(max_length = 20)
-    onay_odemetutar = models.IntegerField(validators=[MaxValueValidator(10000000000)])
+    onay_odemetutar = models.CharField(max_length = 20)
+    #onay_odemetutar = models.IntegerField(validators=[MaxValueValidator(10000000000)])
     onay_parabirimi = models.CharField(max_length = 20)
     onay_odemeyolu = models.CharField(max_length = 20)
 
