@@ -7,6 +7,74 @@
     <h3 style="padding-bottom: 20px; text-align:center">Onay Belgesi Kayıt</h3>
 
     <button id="openNewWindowButton">Yeni Kayıt Oluştur</button>
+
+
+
+
+
+
+
+
+
+
+
+<!-- ****************************************** -->
+<form action="{% url 'muhapp:filter_onay_list' %}">
+    <div class="onaysutun onaytar" style="text-align:left; display: flex; align-items: center; padding-bottom:10px;">
+        <label for="onaytarih" class="form-label" style="width:20%; padding-right:10px;">Onay Tarihi</label>
+        <input type="date" class="form-control" id="onay_tarih_filter" name="onay_tarih_filter">
+    </div>
+    <div class="onaysutun onay_parabirimi" style="text-align:left; display: flex; align-items: center; padding-bottom:10px;">
+        <label for="onay_parabirimi" class="form-label" style="width:20%; padding-right:10px;">Para Birimi</label>
+        <select class="form-select" id="onay_parabirimi_filter" name="onay_parabirimi_filter">
+            <option value="Som">Som</option>
+            <option value="Lira">Lira</option>
+            <option value="Dolar">Dolar</option>
+            <option value="Euro">Euro</option>
+        </select>
+    </div>
+    <button type="submit" class="btn btn-primary btn-sm" style="width: 40%; margin:auto" id="toplamodemetutar">Goster</button>
+</form>
+
+{% if toplam_tutar %}
+    <div>Toplam Tutar: {{ toplam_tutar }}</div>
+{% endif %}
+
+{% for bilgi in filtered_data %}
+    <!-- Burada filtrelenmiş liste içeriğini oluşturun -->
+    <div>{{ bilgi.onay_tarih }} - {{ bilgi.onay_odemetutar }}</div>
+{% endfor %}
+
+
+
+    <!-- bu ksiimda view ve url ler yok simdilik -->
+<!-- ****************************************** -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     <script>
         $(document).ready(function() {
             $("#openNewWindowButton").click(function() {
@@ -25,7 +93,7 @@
                 if (newWindow) {
                     newWindow.moveTo(left, top);
                 }
-            });
+            }); 
             $("#closeNewWindowButton").click(function() {
                 if (newWindow) {
                     newWindow.close();
@@ -102,6 +170,7 @@
 
                     </div>
                     <div class="" style="width: 4%; font-size: 12px;">{{bilgi.username}}</div>
+                    
                 </div>
                     
                     
@@ -111,6 +180,8 @@
         
     </div>
 </div>
+
+
 {%endblock%}
 
 

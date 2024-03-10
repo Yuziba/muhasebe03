@@ -8,6 +8,10 @@ from django.views.generic import TemplateView
 from . import models
 import mimetypes
 from django.contrib.auth.decorators import login_required
+from django.db.models import Sum, F, FloatField  # Burada Sum fonksiyonunu ekleyin
+from django.db.models import F, FloatField, ExpressionWrapper
+from django.db.models import Sum
+from datetime import datetime
 
 #-------------------------------------------------------------------------------------------------------------------------- Ana Sayfa 
 class MainView(TemplateView):
@@ -155,4 +159,20 @@ def edit_onay_bilgi(request, id):
     return render(request, 'muhapp/edit_register_onay.html', {'onay_bilgi': onay_bilgi})
     
 
+
+
+def filter_onay_list(request):
+    onay_tarih = request.GET.get('onay_tarih_filter')
+    onay_parabirimi = request.GET.get('onay_parabirimi_filter')
+    
+    my_filtered_data = models.OnayRegisterModel.objects.filter(onay_tarih=onay_tarih, onay_parabirimi=onay_parabirimi)
+    toplam_tutar = models.OnayRegisterModel.objects.filter(onay_tarih=onay_tarih).aggregate(toplam_tutar=Sum('onay_odemetutar'))['toplam_tutar']
+
+    context = {
+        'filtered_data': my_filtered_data,
+        'toplam_tutar': toplam_tutar,
+        # Diğer değişkenleri ekleyebilirsiniz
+    }
+
+    return render(request, 'muhapp/defter_onay_list.html', context)
 
