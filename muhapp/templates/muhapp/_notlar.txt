@@ -1,0 +1,8 @@
+Yer:001
+{% if toplam_tutar %}            
+    <div><h4>Toplam Tutar: {{ toplam_tutar|intcomma }}</h4></div>          
+{% endif %}
+
+{% for bilgi in filtered_data %}
+    <div>{{ bilgi.onay_tarih }} - {{ bilgi.onay_odemetutar }}</div>            
+{% endfor %}
