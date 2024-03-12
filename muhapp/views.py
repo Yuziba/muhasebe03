@@ -173,6 +173,6 @@ def filter_onay_list(request):
         'toplam_tutar': toplam_tutar,
         # Diğer değişkenleri ekleyebilirsiniz
     }
-
+    
     return render(request, 'muhapp/defter_onay_list.html', context)
 
