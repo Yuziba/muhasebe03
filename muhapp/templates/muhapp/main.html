@@ -1,8 +1,29 @@
 {% extends "base.html" %}
 
 {%block content%}
-<div class="container">
-    <h3>ONAYLAR</h3>
+<div class="container" style="background-color: blanchedalmond;">
+    <div><h3>ANA SAYFA</h3></div>
+    <div>
+        <form action="{% url 'muhapp:filter_onay_list' %}" id="toplamTutatForm">
+            <div>
+                <div class="onaysutun onaytar" style="text-align:left; display: flex; align-items: center; padding-bottom:10px;">
+                    <label for="onaytarih" class="form-label" style="width:20%; padding-right:10px;">Onay Tarihi</label>
+                    <input type="date" class="form-control" id="onay_tarih_filter" name="onay_tarih_filter">
+                </div>
+                <div class="onaysutun onay_parabirimi" style="text-align:left; display: flex; align-items: center; padding-bottom:10px;">
+                    <label for="onay_parabirimi" class="form-label" style="width:20%; padding-right:10px;">Para Birimi</label>
+                    <select class="form-select" id="onay_parabirimi_filter" name="onay_parabirimi_filter">
+                        <option value="Som">Som</option>
+                        <option value="Lira">Lira</option>
+                        <option value="Dolar">Dolar</option>
+                        <option value="Euro">Euro</option>
+                    </select>
+                </div>
+            </div>
+        </form>
+    </div>
+
+
 </div>
 
 
