@@ -8,11 +8,30 @@
         <!-- deneme  -->
         <p>Bugünün Tarihi: {{ bugunun_tarihi }}</p>
 
-    <p>TL Toplam Tutarı: {{ tl_toplam_tutar }}</p>
-    <p>SOM Toplam Tutarı: {{ som_toplam_tutar }}</p>
-    <p>Dolar Toplam Tutarı: {{ dolar_toplam_tutar }}</p>
-    <p>Euro Toplam Tutarı: {{ euro_toplam_tutar }}</p>
-       
+        {% if tl_toplam_tutar %}
+        <p>TL Toplam Tutarı: {{ tl_toplam_tutar }}</p>
+    {% else %}
+        <p>TL Toplam Tutarı: Ödeme Yok</p>
+    {% endif %}
+    
+    {% if som_toplam_tutar %}
+        <p>SOM Toplam Tutarı: {{ som_toplam_tutar }}</p>
+    {% else %}
+        <p>SOM Toplam Tutarı: Ödeme Yok</p>
+    {% endif %}
+    
+    {% if dolar_toplam_tutar %}
+        <p>Dolar Toplam Tutarı: {{ dolar_toplam_tutar }}</p>
+    {% else %}
+        <p>Dolar Toplam Tutarı: Ödeme Yok</p>
+    {% endif %}
+    
+    {% if euro_toplam_tutar %}
+        <p>Euro Toplam Tutarı: {{ euro_toplam_tutar }}</p>
+    {% else %}
+        <p>Euro Toplam Tutarı: Ödeme Yok</p>
+    {% endif %}
+    <p>Genel Toplam Tutarı: {{ toplam_tutar }}</p>  
         
 
 

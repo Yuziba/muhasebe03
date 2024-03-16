@@ -19,7 +19,29 @@ class MainView(TemplateView):
     template_name = 'muhapp/main.html'
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['bugunun_tarihi'] = timezone.now().date()
+        bugunun_tarihi = timezone.now().date()
+        tl_toplam_tutar = models.OnayRegisterModel.objects.filter(onay_tarih=bugunun_tarihi, onay_parabirimi="Lira").aggregate(toplam_tutar=Sum('onay_odemetutar'))['toplam_tutar']
+        
+        # SOM için toplam tutar
+        som_toplam_tutar = models.OnayRegisterModel.objects.filter(onay_tarih=bugunun_tarihi, onay_parabirimi="Som").aggregate(toplam_tutar=Sum('onay_odemetutar'))['toplam_tutar']
+        
+        # Dolar için toplam tutar
+        dolar_toplam_tutar = models.OnayRegisterModel.objects.filter(onay_tarih=bugunun_tarihi, onay_parabirimi="Dolar").aggregate(toplam_tutar=Sum('onay_odemetutar'))['toplam_tutar']
+        
+        # Euro için toplam tutar
+        euro_toplam_tutar = models.OnayRegisterModel.objects.filter(onay_tarih=bugunun_tarihi, onay_parabirimi="Euro").aggregate(toplam_tutar=Sum('onay_odemetutar'))['toplam_tutar']
+        
+        toplam_tutar = models.OnayRegisterModel.objects.filter(onay_tarih=bugunun_tarihi).aggregate(toplam_tutar=Sum('onay_odemetutar'))['toplam_tutar']
+        
+        context = {
+        'bugunun_tarihi': bugunun_tarihi,
+        'tl_toplam_tutar': tl_toplam_tutar,
+        'som_toplam_tutar': som_toplam_tutar,
+        'dolar_toplam_tutar': dolar_toplam_tutar,
+        'euro_toplam_tutar': euro_toplam_tutar,
+        'toplam_tutar': toplam_tutar,
+    }
+        
         return context
 #---------------------------------------------------------------------------------------------------------------------------- SignUp
 class SignUpView(CreateView):
@@ -186,23 +208,24 @@ def deneme(request):
     bugunun_tarihi = timezone.now().date()
     
     # TL için toplam tutar
-    tl_toplam_tutar = models.OnayRegisterModel.objects.filter(onay_tarih=bugunun_tarihi, onay_parabirimi="TL").aggregate(toplam_tutar=Sum('onay_odemetutar'))['toplam_tutar']
+    tl_toplam_tutar = models.OnayRegisterModel.objects.filter(onay_tarih=bugunun_tarihi, onay_parabirimi="Lira").aggregate(toplam_tutar=Sum('onay_odemetutar'))['toplam_tutar']
     
     # SOM için toplam tutar
-    som_toplam_tutar = models.OnayRegisterModel.objects.filter(onay_tarih=bugunun_tarihi, onay_parabirimi="SOM").aggregate(toplam_tutar=Sum('onay_odemetutar'))['toplam_tutar']
+    som_toplam_tutar = models.OnayRegisterModel.objects.filter(onay_tarih=bugunun_tarihi, onay_parabirimi="Som").aggregate(toplam_tutar=Sum('onay_odemetutar'))['toplam_tutar']
     
     # Dolar için toplam tutar
-    dolar_toplam_tutar = models.OnayRegisterModel.objects.filter(onay_tarih=bugunun_tarihi, onay_parabirimi="DOLAR").aggregate(toplam_tutar=Sum('onay_odemetutar'))['toplam_tutar']
+    dolar_toplam_tutar = models.OnayRegisterModel.objects.filter(onay_tarih=bugunun_tarihi, onay_parabirimi="Dolar").aggregate(toplam_tutar=Sum('onay_odemetutar'))['toplam_tutar']
     
     # Euro için toplam tutar
-    euro_toplam_tutar = models.OnayRegisterModel.objects.filter(onay_tarih=bugunun_tarihi, onay_parabirimi="EURO").aggregate(toplam_tutar=Sum('onay_odemetutar'))['toplam_tutar']
-    
+    euro_toplam_tutar = models.OnayRegisterModel.objects.filter(onay_tarih=bugunun_tarihi, onay_parabirimi="Euro").aggregate(toplam_tutar=Sum('onay_odemetutar'))['toplam_tutar']
+    toplam_tutar = models.OnayRegisterModel.objects.filter(onay_tarih=bugunun_tarihi).aggregate(toplam_tutar=Sum('onay_odemetutar'))['toplam_tutar']
     context = {
         'bugunun_tarihi': bugunun_tarihi,
         'tl_toplam_tutar': tl_toplam_tutar,
         'som_toplam_tutar': som_toplam_tutar,
         'dolar_toplam_tutar': dolar_toplam_tutar,
         'euro_toplam_tutar': euro_toplam_tutar,
+        'toplam_tutar': toplam_tutar,
     }
     
     return render(request, 'muhapp/deneme.html', context)

@@ -23,6 +23,7 @@ urlpatterns = [
     path('register_onay_dataBase_kayit', views.register_onay_dataBase_kayit, name="register_onay_dataBase_kayit"),
     path('edit_onay_bilgi/<int:id>/', views.edit_onay_bilgi, name='edit_onay_bilgi'),
 
+    path('defter_onay_list/', views.filter_onay_list, name="filter_onay_list"),
     path('deneme/',views.deneme, name="deneme"),
 
 ]
