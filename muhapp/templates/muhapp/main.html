@@ -1,41 +1,73 @@
 {% extends "base.html" %}
-
+{% load humanize %}
 {%block content%}
-<div class="container" style="background-color: blanchedalmond;">
-    <div><h3>ANA SAYFA</h3></div>
-    <div>
-        
+<div class="container">
+    <div style="display: flex; justify-content: space-between; padding: 10px;">
+        <div><h5>{{ bugunun_tarihi|date:'d/m/Y' }}</h5></div>
+        <div>Hoş Geldiniz {{ user|upper }}</div>
+    </div>
 
-        <!-- deneme  -->
-        {{bugunun_tarihi|date:'d/m/Y'}}
-       
+
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var elements = document.getElementsByClassName('formatted-div');
+            for (var i = 0; i < elements.length; i++) {
+                var text = elements[i].innerHTML;
+                var formattedText = text.replace(/\./g, '|').replace(/,/g, '.').replace(/\|/g, ',');
+                elements[i].innerHTML = formattedText;
+            }
+        });
+    </script>
+
+    
+    <div class="formatted-div">
         {% if tl_toplam_tutar %}
-        <p>TL Toplam Tutarı: {{ tl_toplam_tutar }}</p>
-    {% else %}
-        <p>TL Toplam Tutarı: Ödeme Yok</p>
-    {% endif %}
-    
-    {% if som_toplam_tutar %}
-        <p>SOM Toplam Tutarı: {{ som_toplam_tutar }}</p>
-    {% else %}
-        <p>SOM Toplam Tutarı: Ödeme Yok</p>
-    {% endif %}
-    
-    {% if dolar_toplam_tutar %}
-        <p>Dolar Toplam Tutarı: {{ dolar_toplam_tutar }}</p>
-    {% else %}
-        <p>Dolar Toplam Tutarı: Ödeme Yok</p>
-    {% endif %}
-    
-    {% if euro_toplam_tutar %}
-        <p>Euro Toplam Tutarı: {{ euro_toplam_tutar }}</p>
-    {% else %}
-        <p>Euro Toplam Tutarı: Ödeme Yok</p>
-    {% endif %}
-    <p>Genel Toplam Tutarı: {{ toplam_tutar }}</p>  
-
-
+            <div class="p-3 text-primary-emphasis bg-primary-subtle border border-primary-subtle rounded-3" style="margin-bottom: 20px;">
+                <p class="formatted-number">Bugün Toplam Ödeme Tutarı: {{ tl_toplam_tutar}} Lira</p>
+            </div>
+        {% else %}
+            <div class="p-3 text-primary-emphasis bg-dark-subtle border border-dark-subtle rounded-3" style="margin-bottom: 20px;">
+                <p>Bugün Toplam Ödeme Tutarı: Lira Biriminde Ödeme Yok</p>
+            </div>    
+            {% endif %}
         
+
+        {% if som_toplam_tutar %}
+            <div class="p-3 text-primary-emphasis bg-primary-subtle border border-primary-subtle rounded-3" style="margin-bottom: 20px;">
+                <p>Bugün Toplam Ödeme Tutarı: {{ som_toplam_tutar|floatformat:"2"|default:"0.00"|intcomma}} Som</p>
+            </div>
+        {% else %}
+            <div class="p-3 text-primary-emphasis bg-dark-subtle border border-dark-subtle rounded-3" style="margin-bottom: 20px;"> 
+                <p>Bugün Toplam Ödeme Tutarı: Som Biriminde Ödeme Yok</p>
+            </div>
+        {% endif %}
+            
+        
+        {% if dolar_toplam_tutar %}
+            <div class="p-3 text-primary-emphasis bg-primary-subtle border border-primary-subtle rounded-3" style="margin-bottom: 20px;">
+                <p>Bugün Toplam Ödeme Tutarı: {{ dolar_toplam_tutar }} Dolar</p>
+            </div> 
+        {% else %}
+            <div class="p-3 text-primary-emphasis bg-dark-subtle border border-dark-subtle rounded-3" style="margin-bottom: 20px;">
+                <p>Bugün Toplam Ödeme Tutarı: Dolar Biriminde Ödeme Yok</p>
+            </div>
+        {% endif %}
+        
+        
+        {% if euro_toplam_tutar %}
+            <div class="p-3 text-primary-emphasis bg-primary-subtle border border-primary-subtle rounded-3" style="margin-bottom: 20px;">
+                <p>Bugün Toplam Ödeme Tutarı: {{ euro_toplam_tutar }} Euro</p>
+            </div>
+        {% else %}
+            <div class="p-3 text-primary-emphasis bg-dark-subtle border border-dark-subtle rounded-3" style="margin-bottom: 20px;">
+                <p>Bugün Toplam Ödeme Tutarı: Euro Biriminde Ödeme Yok</p>
+            </div>
+        {% endif %}
+        
+            <!-- <p>Genel Toplam Tutarı: {{ toplam_tutar }}</p>   -->
+        
+
     </div>
 
 
