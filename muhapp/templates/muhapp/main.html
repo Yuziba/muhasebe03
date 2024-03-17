@@ -4,11 +4,11 @@
 <div class="container">
     <div style="display: flex; justify-content: space-between; padding: 10px;">
         <div><h5>{{ bugunun_tarihi|date:'d/m/Y' }}</h5></div>
-        <div>Hoş Geldiniz {{ user|upper }}</div>
+        <div>Hoş Geldiniz <strong>{{ user|upper }}</strong></div>
     </div>
 
 
-
+    <!-- Sayiyi nokta ve virgulle gostermek icin -->
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             var elements = document.getElementsByClassName('formatted-div');
@@ -24,44 +24,44 @@
     <div class="formatted-div">
         {% if tl_toplam_tutar %}
             <div class="p-3 text-primary-emphasis bg-primary-subtle border border-primary-subtle rounded-3" style="margin-bottom: 20px;">
-                <p class="formatted-number">Bugün Toplam Ödeme Tutarı: {{ tl_toplam_tutar}} Lira</p>
+                <p>Bugün Toplam Ödeme Tutarı: <strong>{{ tl_toplam_tutar|floatformat:"2"|default:"0.00"|intcomma }}</strong> Lira</p>
             </div>
         {% else %}
             <div class="p-3 text-primary-emphasis bg-dark-subtle border border-dark-subtle rounded-3" style="margin-bottom: 20px;">
-                <p>Bugün Toplam Ödeme Tutarı: Lira Biriminde Ödeme Yok</p>
+                <p>Bugün Toplam Ödeme Tutarı: <strong>Lira Biriminde Ödeme Yok</strong></p>
             </div>    
             {% endif %}
         
 
         {% if som_toplam_tutar %}
             <div class="p-3 text-primary-emphasis bg-primary-subtle border border-primary-subtle rounded-3" style="margin-bottom: 20px;">
-                <p>Bugün Toplam Ödeme Tutarı: {{ som_toplam_tutar|floatformat:"2"|default:"0.00"|intcomma}} Som</p>
+                <p>Bugün Toplam Ödeme Tutarı: <strong>{{ som_toplam_tutar|floatformat:"2"|default:"0.00"|intcomma}}</strong> Som</p>
             </div>
         {% else %}
             <div class="p-3 text-primary-emphasis bg-dark-subtle border border-dark-subtle rounded-3" style="margin-bottom: 20px;"> 
-                <p>Bugün Toplam Ödeme Tutarı: Som Biriminde Ödeme Yok</p>
+                <p>Bugün Toplam Ödeme Tutarı: <strong>Som Biriminde Ödeme Yok</strong></p>
             </div>
         {% endif %}
             
         
         {% if dolar_toplam_tutar %}
             <div class="p-3 text-primary-emphasis bg-primary-subtle border border-primary-subtle rounded-3" style="margin-bottom: 20px;">
-                <p>Bugün Toplam Ödeme Tutarı: {{ dolar_toplam_tutar }} Dolar</p>
+                <p>Bugün Toplam Ödeme Tutarı: <strong>{{ dolar_toplam_tutar|floatformat:"2"|default:"0.00"|intcomma }}</strong> Dolar</p>
             </div> 
         {% else %}
             <div class="p-3 text-primary-emphasis bg-dark-subtle border border-dark-subtle rounded-3" style="margin-bottom: 20px;">
-                <p>Bugün Toplam Ödeme Tutarı: Dolar Biriminde Ödeme Yok</p>
+                <p>Bugün Toplam Ödeme Tutarı: <strong>Dolar Biriminde Ödeme Yok</strong></p>
             </div>
         {% endif %}
         
         
         {% if euro_toplam_tutar %}
             <div class="p-3 text-primary-emphasis bg-primary-subtle border border-primary-subtle rounded-3" style="margin-bottom: 20px;">
-                <p>Bugün Toplam Ödeme Tutarı: {{ euro_toplam_tutar }} Euro</p>
+                <p>Bugün Toplam Ödeme Tutarı: <strong>{{ euro_toplam_tutar|floatformat:"2"|default:"0.00"|intcomma }}</strong> Euro</p>
             </div>
         {% else %}
             <div class="p-3 text-primary-emphasis bg-dark-subtle border border-dark-subtle rounded-3" style="margin-bottom: 20px;">
-                <p>Bugün Toplam Ödeme Tutarı: Euro Biriminde Ödeme Yok</p>
+                <p>Bugün Toplam Ödeme Tutarı: <strong>Euro Biriminde Ödeme Yok</strong></p>
             </div>
         {% endif %}
         
