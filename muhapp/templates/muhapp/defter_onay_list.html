@@ -137,7 +137,7 @@
                     <div class="" style="width: 3%; background-color: #f1f8fc; padding: 6px;">{{forloop.counter|stringformat:"04d"}}</div>
                     <div class="" style="width: 6%; background-color: #e6f1f7; padding: 6px; border-radius: 6px;">{{bilgi.onay_tarih|date:"d.m.Y"}}</div> 
                     <div class="" style="width: 56%; background-color: #f1f8fc; padding: 6px;">{{bilgi.onay_aciklama}}</div> 
-                    <div class="" style="width: 10%; background-color: #e6f1f7; padding: 6px; border-radius: 6px; text-align: right;">{{bilgi.onay_odemetutar}}</div>
+                    <div class="formatted-div-odemetutar" style="width: 10%; background-color: #e6f1f7; padding: 6px; border-radius: 6px; text-align: right;">{{bilgi.onay_odemetutar|floatformat:"2"|default:"0.00"|intcomma}}</div>
                     <div class="" style="width: 4%; background-color: #f1f8fc; padding: 6px;">{{bilgi.onay_parabirimi}}</div>
                     <div class="" style="width: 6%; background-color: #e6f1f7; padding: 6px; border-radius: 6px;">{{bilgi.onay_odemeyolu}}</div>   
                     <div class="" style="width: 9%; background-color: #f1f8fc; padding: 6px;">{{bilgi.onay_no}}</div> <!--belge no-->
@@ -162,7 +162,17 @@
 
                     </div>
                     <div class="" style="width: 4%; font-size: 12px;">{{bilgi.username}}</div>
-                    
+                    <!-- ,deme tutarini 1.000.000.61 gib bir formatta gostermesi icin-->
+                    <script>
+                        document.addEventListener("DOMContentLoaded", function() {
+                            var elements = document.getElementsByClassName('formatted-div-odemetutar');
+                            for (var i = 0; i < elements.length; i++) {
+                                var text = elements[i].innerHTML;
+                                var formattedText = text.replace(/\./g, '|').replace(/,/g, '.').replace(/\|/g, ',');
+                                elements[i].innerHTML = formattedText;
+                            }
+                        });
+                    </script>
                 </div>
                     
                     
