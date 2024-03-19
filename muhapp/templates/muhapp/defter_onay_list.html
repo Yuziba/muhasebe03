@@ -136,11 +136,23 @@
                 <div class="" style="display: flex; text-align:center; align-items: center; background-color: #f1f8fc;"> <!--height:60px;  uygun gibi-->
                     <div class="" style="width: 3%; background-color: #f1f8fc; padding: 6px;">{{forloop.counter|stringformat:"04d"}}</div>
                     <div class="" style="width: 6%; background-color: #e6f1f7; padding: 6px; border-radius: 6px;">{{bilgi.onay_tarih|date:"d.m.Y"}}</div> 
-                    <div class="" style="width: 56%; background-color: #f1f8fc; padding: 6px;">{{bilgi.onay_aciklama}}</div> 
+                    <div class="" style="width: 56%; background-color: #f1f8fc; padding: 6px;">
+                        {% if bilgi.onay_aciklama %}
+                            {{ bilgi.onay_aciklama }}
+                        {% else %} <!-- eger bossa-->
+                            <div style="opacity: 0.25   ;">Açıklama alanı...</div>
+                        {% endif %}</div> 
+
                     <div class="formatted-div-odemetutar" style="width: 10%; background-color: #e6f1f7; padding: 6px; border-radius: 6px; text-align: right;">{{bilgi.onay_odemetutar|floatformat:"2"|default:"0.00"|intcomma}}</div>
                     <div class="" style="width: 4%; background-color: #f1f8fc; padding: 6px;">{{bilgi.onay_parabirimi}}</div>
                     <div class="" style="width: 6%; background-color: #e6f1f7; padding: 6px; border-radius: 6px;">{{bilgi.onay_odemeyolu}}</div>   
-                    <div class="" style="width: 9%; background-color: #f1f8fc; padding: 6px;">{{bilgi.onay_no}}</div> <!--belge no-->
+                    <div class="" style="width: 9%; background-color: #f1f8fc; padding: 6px;">
+                        {% if bilgi.onay_no %}
+                            {{bilgi.onay_no}}
+                        {% else %}
+                            <div style="opacity: 0.25;">Belge no yok!</div>
+                        {% endif %}
+                    </div> <!--belge no-->
                     <div class="" style="width: 2%; display:flex; flex-direction: column; align-items: center;">
                         <div style="background-color: #fce5e5; border: 1px solid #000; border-radius: 5px;">
                             <a href="{% url 'muhapp:onay_list_delete' id=bilgi.id %}" 
@@ -157,11 +169,10 @@
                                 <img src="{% static 'muhapp/images/edit.svg' %}" alt="Edit">
                             </a>
                         </div>
-
-                        
-
                     </div>
                     <div class="" style="width: 4%; font-size: 12px;">{{bilgi.username}}</div>
+                    
+
                     <!-- ,deme tutarini 1.000.000.61 gib bir formatta gostermesi icin-->
                     <script>
                         document.addEventListener("DOMContentLoaded", function() {

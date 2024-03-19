@@ -9,3 +9,9 @@ class OnayRegisterModelForm(forms.ModelForm):
         model = OnayRegisterModel
         fields = ['onay_no', 'onay_aciklama', 'onay_tarih', 'onay_odemetutar', 'onay_parabirimi', 'onay_odemeyolu']
 #------------------------------------------------------------------------------------------------------------------------------
+        
+#----------------------------------------------------------------------------defter onay list ekraninda radio buton yapmak icin.      
+
+
+
+    

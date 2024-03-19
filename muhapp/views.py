@@ -14,6 +14,7 @@ from django.db.models import Sum
 from datetime import datetime
 from django.utils import timezone
 import datetime
+
 #-------------------------------------------------------------------------------------------------------------------------- Ana Sayfa 
 class MainView(TemplateView):
     template_name = 'muhapp/main.html'
@@ -230,4 +231,4 @@ def deneme(request):
     
     return render(request, 'muhapp/deneme.html', context)
 
-
+#------------------------------------------------------------------------------------------------------------ 

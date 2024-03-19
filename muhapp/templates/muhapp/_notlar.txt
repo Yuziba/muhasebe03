@@ -6,3 +6,13 @@ Yer:001
 {% for bilgi in filtered_data %}
     <div>{{ bilgi.onay_tarih }} - {{ bilgi.onay_odemetutar }}</div>            
 {% endfor %}
+
+
+---------------------------------------------- radio buton form
+class OdemeDurumuForm(forms.ModelForm):
+    
+    OdemDurumu = forms.ChoiceField(choices=[(True, 'Açık'), (False, 'Kapalı')], widget=forms.RadioSelect)
+
+---------------------------------------------- radio buton html
+<div><input type="radio" name="OdemDurumu_{{ forloop.counter }}" value="OdemDurumu"></div>
+name icinde forloop kullanmamizin nedeni isimlendirme farkli olmazsa diger radio butonlarida alip tek bi tane secmemize izin verir hale geliyor
