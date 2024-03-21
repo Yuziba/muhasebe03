@@ -1,31 +1,50 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Düzenleme Sayfası</title>
-</head>
-<body>
-    <h2>Düzenleme Sayfası</h2>
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container">
+    <h4 style="margin-bottom: 50px;">Onay Düzenleme Sayfası</h4>
     <form method="post">
         {% csrf_token %}
-        <label for="onay_no">Onay No:</label>
+        <!--
+            <label for="onay_no">Onay No:</label>
         <input type="text" name="onay_no" value="{{ onay_bilgi.onay_no }}"><br>
+        -->
+        <div class="card">
+            <div class="card-header" style="align-items: center; background-color: #f1f8fc; ">
 
-        <label for="onay_aciklama">Onay Açıklama:</label>
-        <input type="text" name="onay_aciklama" value="{{ onay_bilgi.onay_aciklama }}"><br>
-
-        <label for="onay_tarih">Onay Tarih:</label>
-        <input type="text" name="onay_tarih" value="{{ onay_bilgi.onay_tarih }}"><br>
-
-        <label for="onay_odemetutar">Onay Ödeme Tutar:</label>
-        <input type="text" name="onay_odemetutar" value="{{ onay_bilgi.onay_odemetutar }}"><br>
-
-        <label for="onay_parabirimi">Onay Para Birimi:</label>
-        <input type="text" name="onay_parabirimi" value="{{ onay_bilgi.onay_parabirimi }}"><br>
-
-        <label for="onay_odemeyolu">Onay Ödeme Yolu:</label>
-        <input type="text" name="onay_odemeyolu" value="{{ onay_bilgi.onay_odemeyolu }}"><br>
-
-        <button type="submit">Kaydet</button>
+                <div style="text-align:left; display: flex; align-items: center; padding-bottom:10px;">
+                    <label for="onay_aciklama" style="width: 200px;">Onay Açıklama:</label>
+                    <input type="text" name="onay_aciklama" style="flex: 1;" value="{{ onay_bilgi.onay_aciklama }}"><br>
+                </div>
+                
+            
+                <div style="text-align:left; display: flex; align-items: center; padding-bottom:10px;">
+                    <label for="onay_tarih" style="width: 200px;">Onay Tarih:</label>
+                    <input type="date" name="onay_tarih"  value="{{ onay_bilgi.onay_tarih }}"><br>
+                </div>
+            
+                <div style="text-align:left; display: flex; align-items: center; padding-bottom:10px;">
+                    <label for="onay_odemetutar" style="width: 200px;">Onay Ödeme Tutar:</label>
+                    <input type="text" name="onay_odemetutar" style="flex: 1;" value="{{ onay_bilgi.onay_odemetutar }}"><br>
+                </div>
+            
+                <div style="text-align:left; display: flex; align-items: center; padding-bottom:10px;">
+                    <label for="onay_parabirimi" style="width: 200px;">Onay Para Birimi:</label>
+                    <input type="text" name="onay_parabirimi" style="flex: 1;" value="{{ onay_bilgi.onay_parabirimi }}"><br>
+                </div>
+            
+                <div style="text-align:left; display: flex; align-items: center; padding-bottom:10px;">
+                    <label for="onay_odemeyolu" style="width: 200px;">Onay Ödeme Yolu:</label>
+                    <input type="text" name="onay_odemeyolu" style="flex: 1;" value="{{ onay_bilgi.onay_odemeyolu }}"><br>
+                </div>
+            
+                <button type="submit">Kaydet</button>
+            </div>
+            
+        </div>
+        
     </form>
-</body>
-</html>
+</div>
+
+{% endblock %}

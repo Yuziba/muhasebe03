@@ -165,7 +165,7 @@ def edit_onay_bilgi(request, id):
 
     if request.method == 'POST':
         # POST verilerini al
-        onay_no = request.POST.get('onay_no')
+        #onay_no = request.POST.get('onay_no')
         onay_aciklama = request.POST.get('onay_aciklama')
         onay_tarih = request.POST.get('onay_tarih')
         onay_odemetutar = request.POST.get('onay_odemetutar')
@@ -173,7 +173,7 @@ def edit_onay_bilgi(request, id):
         onay_odemeyolu = request.POST.get('onay_odemeyolu')
 
         # Modeli güncelle
-        onay_bilgi.onay_no = onay_no
+        #onay_bilgi.onay_no = onay_no
         onay_bilgi.onay_aciklama = onay_aciklama
         onay_bilgi.onay_tarih = onay_tarih
         onay_bilgi.onay_odemetutar = onay_odemetutar
