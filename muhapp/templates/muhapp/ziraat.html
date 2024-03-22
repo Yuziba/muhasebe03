@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{%block content%}
+<div class="container">
+    <div style="text-align:center;"><h3>Ziraat Banka Talimatları</h3></div> 
+    <!---- burdaki slaşlar cok onemli------ /onaylar/ ------>
+    <form action="/ziraat_upload/" method="POST" class="dropzone" id="my-awesome-dropzone">
+      {% csrf_token %}
+      <div class="fallback">
+        <input name="file" type="file" multiple>
+      </div>
+  
+    <!---------------------------------------------------------------------------------------------------------Ziraat Belgelerini listeleme-->
+    <h6>Bu kisimda sutun basliklari olabili veya siralama yapmak icin bir buton</h6>
+    
+      {% for file in ziraatBankaTalimatlari %}
+      <div class="card" style="margin: 5px;">
+        <div class="card-header" style="display: flex; align-items: center; ">
+          <div class="" style="width: 90%; "><span class="dosya-label">{{ file.file.name }}</span></div>
+          <div class="" style="padding-left:5px; text-align: right;"><a href="{% url 'muhapp:onay_delete' file.id %}">Sil</a></div>
+          <div class="" style="padding-left:5px; text-align: right;"><a href="{% url 'muhapp:onay_download' file_id=file.id %}">Dosyayı İndir</a></div>
+        </div>
+      </div>
+      {% endfor %}
+    
+  </form>
+  </div>
+
+{% endblock %}

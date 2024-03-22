@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 from django.core.validators import MaxValueValidator, MinValueValidator, MaxLengthValidator
 
-# Create your models here.
+#----------------------------------------------------------------------------------- onay belgesi yukleme model  
 class OnayUploadedModel(models.Model):
     file = models.FileField(upload_to='')
     uploaded_at = models.DateTimeField(auto_now_add=True)
@@ -29,5 +29,20 @@ class OnayRegisterModel(models.Model):
         
     def __str__(self):
         return f"kullanici+ {self.username} Belgeno+: {self.onay_no} Aciklama+: {self.onay_aciklama} Tarih+: {self.onay_tarih} Odeme Tutrari+: {self.onay_odemetutar} Para Birimi+: {self.onay_parabirimi} Odeme yolu+: {self.onay_odemeyolu}"
+
+#----------------------------------------------------------------------------------- onay belgesi yukleme model  
+class ZiraatUploadModel(models.Model):
+    file = models.FileField(upload_to='')
+    uploaded_at = models.DateTimeField(auto_now_add=True)
+    def __str__(self):
+        return self.file.name  
+
+
+
+
+
+
+
+
 
 

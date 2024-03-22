@@ -20,24 +20,25 @@
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav ms-auto mb-2 mb-md-0">
               {% if request.user.is_authenticated %}
+         
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="{% url 'muhapp:onay_list' %}">Onaylar</a>
+                <a class="nav-link {% if request.path == '/onay_list/' %}active{% endif %}" aria-current="page" href="{% url 'muhapp:onay_list' %}">Onaylar</a>
               </li>
 
               <li class="nav-item">
-                <a class="nav-link" href="#">Ziraat</a>
+                <a class="nav-link {% if request.path == '/ziraat/' %} active {% endif %}" href="{% url 'muhapp:ziraat' %}">Ziraat</a>
               </li>
 
               <li class="nav-item">
-                <a class="nav-link" href="#">DemirBank-YF</a>
+                <a class="nav-link {% if request.path == '/demirbank-yf/' %}active{% endif %}" href="#">DemirBank-YF</a>
               </li>
 
               <li class="nav-item">
-                <a class="nav-link" href="#">DemirBank-Duz</a>
+                <a class="nav-link {% if request.path == '/demirbank-duz/' %} active {% endif %}" href="#">DemirBank-Duz</a>
               </li>
 
               <li class="nav-item">
-                <a class="nav-link" href="{% url 'muhapp:defterler' %}">Defterler</a>
+                <a class="nav-link {% if request.path == '/defterler/' %} active {% endif %}" href="{% url 'muhapp:defterler' %}">Defterler</a>
               </li>
 
               <li class="nav-item">

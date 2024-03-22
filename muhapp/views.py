@@ -232,3 +232,27 @@ def deneme(request):
     return render(request, 'muhapp/deneme.html', context)
 
 #------------------------------------------------------------------------------------------------------------ 
+#                                                    Ziraatler
+#------------------------------------------------------------------------------------------------------------ 
+#----------------------------------------------------------------------------------------------------------------- Ziraat Yukleme View 
+def ziraat_upload_view(request):
+    if request.method == "POST":
+        uploaded_file = request.FILES.get('file')
+        if uploaded_file:
+            new_file = models.ZiraatUploadModel(file=uploaded_file)
+            new_file.save()
+            return JsonResponse({'message': 'Dosya başarıyla yüklendi.' }, status=200)
+        else:
+            return JsonResponse({'error': 'Dosya yüklenirken bir hata oluştu.'}, status=400)
+    else:
+        return JsonResponse({'error' : 'Geçersiz istek yöntemi.'}, status=405)
+
+#----------------------------------------------------------------------------------------------------------------- Ziraat Yuklenen begeleri listeleme    
+def ziraat_list_view(request):
+    ziraatBankaTalimatlari = models.ZiraatUploadModel.objects.all()
+    return render(request, 'muhapp/ziraat.html', {'files':ziraatBankaTalimatlari})
+
+#----------------------------------------------------------------------------------------------------------------- Ziraat Yuklenen begeleri silme
+#----------------------------------------------------------------------------------------------------------------- Ziraat Yuklenen begeleri indirme   
+
+
