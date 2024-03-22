@@ -254,5 +254,10 @@ def ziraat_list_view(request):
 
 #----------------------------------------------------------------------------------------------------------------- Ziraat Yuklenen begeleri silme
 #----------------------------------------------------------------------------------------------------------------- Ziraat Yuklenen begeleri indirme   
+#----------------------------------------------------------------------------------- ziraat Talimat kait Defteri sayfasinda bilgileri gostermek icin
 
+def ziraat_defter_list_view(request):
+    ziraat_defter_list_view = models.ZiraatUploadModel.objects.all()
+    ziraat_defter_list_view = {"ziraat_defter_list_view":ziraat_defter_list_view}
+    return render(request, 'muhapp/defter_ziraat.html', context=ziraat_defter_list_view)
 

@@ -9,7 +9,95 @@
         /* Mavi renk kodu */
     }
 </style>
+<div style=" margin: auto; padding-bottom: 50px; width: 98%">
+    <div class="bg-danger-subtle border border-danger"><h3 style="display: flex; justify-content: center; align-items: center; padding: 10px;">Ziraat Talimat Kayit</h3></div>
+    
+    <div class="" style="display: flex;">
+        <div style="width: 20%;"> <button id="openNewWindowZiraatButton">Yeni Kayıt Oluştur</button> </div>
+        <div style="width: 30%;"> <p>bu alana filtrelemek icin form</p> </div>
+    
+    </div>
 
-<h3 style="padding-bottom: 20px; text-align:center">Ziraat Talimat Kayit</h3>
+    <div style="width: 100%; margin:auto">
+        <div class="card">
+            <div class="" style="display: flex; text-align:center; align-items: center; background-color: #acdcf8; text-align: center; font-weight: bolder; height: 60px;">
+                <div class="" style="width: 3%; padding: 6px;">Sıra</div>
+                <div class="" style="width: 6%; padding: 6px; border-radius: 6px;">Tarih</div> 
+                <div class="" style="width: 56%; padding: 6px;">Açıklama</div> 
+                <div class="" style="width: 10%; padding: 6px; border-radius: 6px;">Ödenecek Tutar</div>
+                <div class="" style="width: 4%; padding: 6px;">Birim</div>
+                <div class="" style="width: 6%; padding: 6px; border-radius: 6px;">Ödeme Yolu</div>   
+                <div class="" style="width: 9%; padding: 6px;">SGB Belge No</div> <!--belge no-->
+                <div class="" style="width: 2%; display:flex; flex-direction: column;">Edit</div>
+                <div class="" style="width: 4%;">Yazar</div>
+            </div>
+        </div>
+    </div>
+    <!-- ------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+    {%for bilgi in ziraat_defter_list_view %}
+        <div class="card">
+            <div class="" style="display: flex; text-align:center; align-items: center; background-color: #f1f8fc;"> <!--height:60px;  uygun gibi-->
+                <div class="" style="width: 3%; background-color: #f1f8fc; padding: 6px;">{{forloop.counter|stringformat:"04d"}}</div>
+                <div class="" style="width: 6%; background-color: #e6f1f7; padding: 6px; border-radius: 6px;">{{bilgi.onay_tarih|date:"d.m.Y"}}</div> 
+                <div class="" style="width: 56%; background-color: #f1f8fc; padding: 6px;">
+                    {% if bilgi.onay_aciklama %}
+                        {{ bilgi.onay_aciklama }}
+                    {% else %} <!-- eger bossa-->
+                        <div style="opacity: 0.25   ;">Açıklama alanı...</div>
+                    {% endif %}
+                </div> 
+
+                <div class="formatted-div-odemetutar" style="width: 10%; background-color: #e6f1f7; padding: 6px; border-radius: 6px; text-align: right;">{{bilgi.onay_odemetutar|floatformat:"2"|default:"0.00"|intcomma}}</div>
+                <div class="" style="width: 4%; background-color: #f1f8fc; padding: 6px;">{{bilgi.onay_parabirimi}}</div>
+                <div class="" style="width: 6%; background-color: #e6f1f7; padding: 6px; border-radius: 6px;">{{bilgi.onay_odemeyolu}}</div>   
+                <div class="" style="width: 9%; background-color: #f1f8fc; padding: 6px;">
+                    {% if bilgi.onay_no %}
+                        {{bilgi.onay_no}}
+                    {% else %}
+                        <div style="opacity: 0.25;">Belge no yok!</div>
+                    {% endif %}
+                </div> <!--belge no-->
+
+                <div class="" style="width: 2%; display:flex; flex-direction: column; align-items: center;">
+                    <div style="background-color: #fce5e5; border: 1px solid #000; border-radius: 5px;">
+                        <a href="{% url 'muhapp:onay_list_delete' id=bilgi.id %}" 
+                            class="btn btn-sm" 
+                            style="margin: 4px; height: 16px; width:16px; display: flex; align-items: center; justify-content: center; ">
+                            <img  src="{% static 'muhapp/images/trash.svg' %}" alt="Sil">
+                        </a>
+                    </div>
+
+                    <div style="background-color: #f5c66e; border: 1px solid #000; border-radius: 5px;">
+                        <a href="{% url 'muhapp:edit_onay_bilgi' id=bilgi.id %}" 
+                            class="btn btn-sm" 
+                            style="margin: 4px; height: 10px; width:10px; display: flex; align-items: center; justify-content: center;">
+                            <img src="{% static 'muhapp/images/edit.svg' %}" alt="Edit">
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="" style="width: 4%; font-size: 12px;">{{bilgi.username}}</div>
+                    
+
+                    <!-- ,deme tutarini 1.000.000.61 gib bir formatta gostermesi icin-->
+                <script>
+                    document.addEventListener("DOMContentLoaded", function() {
+                        var elements = document.getElementsByClassName('formatted-div-odemetutar');
+                        for (var i = 0; i < elements.length; i++) {
+                            var text = elements[i].innerHTML;
+                            var formattedText = text.replace(/\./g, '|').replace(/,/g, '.').replace(/\|/g, ',');
+                             elements[i].innerHTML = formattedText;
+                        }
+                    });
+                </script>
+            </div>      
+                    
+        </div>
+            
+    {%endfor%}
+
+</div>
+
+
 
 {%endblock%}

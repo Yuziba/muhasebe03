@@ -16,6 +16,9 @@ urlpatterns = [
     path('signup/', views.SignUpView.as_view(), name='signup'), 
 
     path('defter_onay_list', views.defter_onay_list_view, name="defter_onay_list"),         # onay bilgileri listeleme
+    path('ziraat_defter_list_view', views.ziraat_defter_list_view, name="ziraat_defter_list_view"), # ziraat defteri kayit bilgileri listeleme
+
+
     path('onay_list_delete/<int:id>',views.onay_list_delete_view, name="onay_list_delete"), #burda id almamiz gerek
 
     # belge yuklemeler
