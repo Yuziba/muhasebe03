@@ -37,6 +37,21 @@ class ZiraatUploadModel(models.Model):
     def __str__(self):
         return self.file.name  
 
+#----------------------------------------------------------------------------------- ziraat talimat kayit defteri model  
+class ZiraatRegisterModel(models.Model):
+    username = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    #sira no yazmadik cunku onu veri tabaninda islemeyecegim
+    ziraat_tarih = models.DateField()
+    ziraat_firma_adi = models.CharField(max_length = 100) #------------------html kisminda daha da kislatilabilir
+    ziraat_muhasebe_belge_no = models.CharField(max_length = 10)
+    ziraat_aciklama = models.CharField(max_length = 150) #------------------------------------html kisminda sinirlandirabiliriz
+    ziraat_tutar = models.CharField(max_length = 20)
+    ziraat_para_birimi = models.CharField(max_length = 20)
+
+    def __str__(self):
+        return f"Kullanıcı+ {self.username} Tarih+: {self.ziraat_tarih} Firma Adı+: {self.ziraat_firma_adi} Muhasebe Belge No+: {self.ziraat_muhasebe_belge_no} Açıklama+: {self.ziraat_aciklama} Ödeme Tutarı+: {self.ziraat_tutar} Para Birimi+: {self.ziraat_para_birimi} "    
+
+
 
 
 

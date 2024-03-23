@@ -95,8 +95,12 @@ def onay_download_view(request, file_id):
             return response
     except FileNotFoundError:
         raise Http404("Belirtilen dosya bulunamadı.")
+    
 
 
+
+
+# ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++     Defterler
 #---------------------------------------------------------------------------------------------------------- Kayit Defterleri 1. sayfasi
 class Belge_Kayit_View(TemplateView):
     template_name = 'muhapp/defterler.html'
@@ -112,20 +116,31 @@ class Demir_Duz_Kayit_View(TemplateView):
 #------------------------------------------------------------------------------------------- Demirbank Talimat YF Kayit Defteri sayfasi
 class Demir_YF_Kayit_View(TemplateView):
     template_name = 'muhapp/defter_dbank_yf.html'
+# +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
+
+
+
+
+
+# +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++     Register views:Yeni kayit butonu
 #--------------------------------------------------------------------------------------- Onay Defter Kayit Defteri (New Window) sayfasi
 class Register_Onay_View(TemplateView):
     template_name = 'muhapp/register_onay.html'
 
+class Register_Ziraat_View(TemplateView):
+    template_name = 'muhapp/register_ziraat.html'
 
-#----------------------------------------------------------------------------------- Onay Defteri sayfasinda bilgileri gostermek icin
-def defter_onay_list_view(request):
-    defter_onay_list = models.OnayRegisterModel.objects.all()
-    defter_onay_list = {"defter_onay_list":defter_onay_list}
-    return render(request, 'muhapp/defter_onay_list.html', context=defter_onay_list)
-    #return render(request, 'muhapp/defter_onay_list.html', {'onay_bilgiler': onay_bilgiler})
 
-#----------------------------------------------------------------------------------------------- Onay Defter Kayit Defteri (New Window)
+
+
+# +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    
+
+
+
+# +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++     Register views:Veritabanina kaydetme
+
 def register_onay_dataBase_kayit(request):
     if request.method == 'POST':
         onay_no         = request.POST.get("onay_no", "")
@@ -148,7 +163,29 @@ def register_onay_dataBase_kayit(request):
         return response
     else:
         return render(request, 'muhapp/main.html')
+    
+
+
+# +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+
+
         
+# +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++     Kaydedilen defter bilgilerini gosterme
+#----------------------------------------------------------------------------------- Onay Defteri sayfasinda bilgileri gostermek icin
+def defter_onay_list_view(request):
+    defter_onay_list = models.OnayRegisterModel.objects.all()
+    defter_onay_list = {"defter_onay_list":defter_onay_list}
+    return render(request, 'muhapp/defter_onay_list.html', context=defter_onay_list)
+    #return render(request, 'muhapp/defter_onay_list.html', {'onay_bilgiler': onay_bilgiler})
+
+
+
+
+
+
+
 
 #--------------------------------------------------------------------------------------------------- Onay Defter Kayit silme
 @login_required

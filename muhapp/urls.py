@@ -8,12 +8,17 @@ urlpatterns = [
 
     # defterler
     path('defterler/', views.Belge_Kayit_View.as_view(), name="defterler"),                 #Defterlerin Ana Sayfasi
+    path('signup/', views.SignUpView.as_view(), name='signup'), 
     #path('defter_onay_list', views.Onay_Kayit_View.as_view(), name="defter_onay_list"),    #Onay Belgesi Defteri sayfasi
     path('defter_ziraat', views.Ziraat_Kayit_View.as_view(), name="defter_ziraat"),         #Ziraat Belgesi Defteri sayfasi
     path('defter_dbank_duz', views.Demir_Duz_Kayit_View.as_view(), name="defter_dbank_duz"),#Demir Belgesi Defteri sayfasi
     path('defter_dbank_yf', views.Demir_YF_Kayit_View.as_view(), name="defter_dbank_yf"),   #Demir Belgesi Defteri sayfasi
+
+
+
+    # register : defterlere kayit
     path('register_onay', views.Register_Onay_View.as_view(), name="register_onay"),        #register_onay sayfasi
-    path('signup/', views.SignUpView.as_view(), name='signup'), 
+    path('register_ziraat', views.Register_Ziraat_View.as_view(), name="register_ziraat"), 
 
     path('defter_onay_list', views.defter_onay_list_view, name="defter_onay_list"),         # onay bilgileri listeleme
     path('ziraat_defter_list_view', views.ziraat_defter_list_view, name="ziraat_defter_list_view"), # ziraat defteri kayit bilgileri listeleme

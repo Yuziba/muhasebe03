@@ -14,6 +14,35 @@
     
     <div class="" style="display: flex;">
         <div style="width: 20%;"> <button id="openNewWindowZiraatButton">Yeni Kayıt Oluştur</button> </div>
+            <script>
+                $(document).ready(function() {
+                    $("#openNewWindowZiraatButton").click(function() {
+                        // Yeni pencere açma işlemi
+                        
+                        var screenWidth = window.screen.width;
+                        var screenHeight = window.screen.height;
+                        var windowWidth = Math.round(screenWidth * 0.9);
+                        var windowHeight = Math.round(screenHeight * 0.9);
+            
+                        var left = Math.round((screenWidth - windowWidth) / 2);
+                        var top = Math.round((screenHeight - windowHeight) / 2);
+            
+                        var newWindow = window.open('{% url 'muhapp:register_ziraat' %}', '_blank', 'height=' + windowHeight + ', width=' + windowWidth);
+            
+                        if (newWindow) {
+                            newWindow.moveTo(left, top);
+                        }
+                    }); 
+                    $("#closeNewWindowButton").click(function() {
+                        if (newWindow) {
+                            newWindow.close();
+                        }
+                    });
+                });
+            </script>
+
+
+
         <div style="width: 30%;"> <p>bu alana filtrelemek icin form</p> </div>
     
     </div>
@@ -101,3 +130,19 @@
 
 
 {%endblock%}
+
+
+
+
+
+<!--
+    Sira : primary key olacak
+    Tarih
+    Firma Adi
+    Muh Belge No
+    Aiklama
+    Tutar
+    Para Birimi
+    rusca yazi ile
+    kim yazi     
+-->
