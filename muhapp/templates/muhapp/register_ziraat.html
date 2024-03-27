@@ -1,10 +1,115 @@
 {% extends "base.html" %}
-
+{% load tz %}
 {% block content %}
 <div class="container">
     <h3 style="padding-bottom: 20px; text-align:center">Ziraat Banka Talimatı Kayıt Defteri</h3>
-    <form action=" url 'muhapp:register_ziraat_dataBase_kayit' "></form>
+    <form action="{% url 'muhapp:register_ziraat_dataBase_kayit' %}" method="POST">
+        {% csrf_token%}
+        <div class="card">
+            <div class="card-header">
 
+
+                <!-- Ziraat Tarih Alani -->
+                <div class="" style="text-align:left; display: flex; align-items: center; padding-bottom:10px;">
+                    <label for="ziraat_tarih" class="form-label" style="width:20%; padding-right:10px;">Talimat Tarihi</label>
+                    <input type="date" class="form-control" id="ziraat_tarih" name="ziraat_tarih">
+                </div>
+    
+                    <script>
+                        document.addEventListener('DOMContentLoaded', function () {
+                            // Bugünün tarihini alma
+                            var today = new Date().toISOString().split('T')[0];
+        
+                            // Onay Tarihi alanına bugünün tarihini atama
+                            var onayTarihInput = document.getElementById('ziraat_tarih');
+                            if (onayTarihInput) {
+                                onayTarihInput.value = onayTarihInput.value || today;
+                            }
+                        });
+                    </script>
+
+                <!-- Belgenin Ilgili Oldugu Firma Alani -->
+                <div class="ziraat_firma_adi" style="text-align:left; display: flex; align-items: center; padding-bottom:10px;">
+                    <label for="ziraat_firma_adi" class="form-label" style="width:20%; padding-right:10px;">İlgili Firma Adı</label>
+                    <input type="text" class="form-control" id="ziraat_firma_adi" name="ziraat_firma_adi" maxlength="110">
+                </div>
+
+                <!-- Muhasebe Belge Numarasi Alani -->
+                <div class="ziraat_muhasebe_belge_no" style="text-align:left; display: flex; align-items: center; padding-bottom:10px;">
+                    <label for="ziraat_muhasebe_belge_no" class="form-label" style="width:20%; padding-right:10px;">Muhasebe Belge Numarası</label>
+                    <input type="text" class="form-control" id="ziraat_muhasebe_belge_no" name="ziraat_muhasebe_belge_no" maxlength="110">
+                </div>
+
+                <!-- Ziraat Tarih Alani -->
+                <div class="ziraat_aciklama" style="text-align:left; display: flex; align-items: center; padding-bottom:10px;">
+                    <label for="ziraat_aciklama" class="form-label" style="width:20%; padding-right:10px;">Açıklama</label>
+                    <input type="text" class="form-control" id="ziraat_aciklama" name="ziraat_aciklama" maxlength="110">
+                </div>
+
+                <!-- Ziraat Talimat Tutar Alani -->
+                <div class="ziraat_tutar" style="text-align:left; display: flex; align-items: center; padding-bottom:10px;">
+                    <label for="ziraat_tutar" class="form-label" style="width:20%; padding-right:10px;">Ödeme Tutarı</label>
+                    <input type="text" class="form-control" id="ziraat_tutar" name="ziraat_tutar">
+                </div>
+                <script>
+                    document.getElementById("ziraat_tutar").addEventListener("input", function() {
+                        var inputValue = this.value;
+                
+                        // Girdiyi kontrol et
+                        if (!isValidInput(inputValue)) {
+                            alert("Geçerli bir sayı girin.");
+                            // Girdiyi sıfırla veya başka bir işlem yapabilirsiniz
+                            this.value = "";
+                        } 
+                    });
+                
+                    // Geçerli girdi kontrolü için yardımcı fonksiyon
+                    function isValidInput(value) {
+                        var regex = /^[0-9,]*$/; // Rakam ve virgül içermeli
+                        return regex.test(value);
+                    }
+                </script>
+
+                <!-- Ziraat Talimat Para Birimi Alani -->
+                <div class="ziraat_para_birimi" style="text-align:left; display: flex; align-items: center; padding-bottom:10px;">
+                    <label for="ziraat_para_birimi" class="form-label" style="width:20%; padding-right:10px;">Para Birimi</label>
+                    <select class="form-select" id="ziraat_para_birimi" name="ziraat_para_birimi">
+                        <option value="Lira">Lira</option>
+                        <option value="Dolar">Dolar</option>
+                        <option value="Euro">Euro</option>
+                        <option value="DisGidenYazi">Dış Giden Yazı</option>
+                    </select>
+                </div>
+
+                <div style="width: 100%; display:flex"> 
+                    <button type="submit" class="btn btn-primary btn-sm" style="width: 40%; margin:auto" id="closeNewWindowButton">Kaydet</button>
+                </div>
+
+
+            </div>
+        </div>
+
+    </form>
+
+    <script>
+        document.getElementById("submitFormButton").addEventListener("click", function() {
+            var ziraatTarihInput = document.getElementById("onay_tarih");
+            var ziraatTarihValue = ziraatTarihInput.value;
+        
+            // Tarih formatını kontrol et
+            if (!isValidDate(ziraatTarihValue)) {
+                alert("Geçerli bir tarih formatı girin (YYYY-MM-DD).");
+                // Formun gönderilmesini engelle
+                event.preventDefault();
+            }
+        });
+        
+        // Tarih formatını kontrol etmek için bir yardımcı fonksiyon
+        function isValidDate(dateString) {
+            var regex = /^\d{4}-\d{2}-\d{2}$/;
+            return regex.test(dateString);
+        }
+    </script>
 
 
 </div>

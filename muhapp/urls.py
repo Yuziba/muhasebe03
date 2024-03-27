@@ -16,12 +16,17 @@ urlpatterns = [
 
 
 
-    # register : defterlere kayit
+    # register : defterlere kayit sayfalari yonlendirme
     path('register_onay', views.Register_Onay_View.as_view(), name="register_onay"),        #register_onay sayfasi
     path('register_ziraat', views.Register_Ziraat_View.as_view(), name="register_ziraat"), 
 
+    # register: veri tabanaina kaydetme
+    path('register_onay_dataBase_kayit', views.register_onay_dataBase_kayit, name="register_onay_dataBase_kayit"),
+    path('register_ziraat_dataBase_kayit', views.register_ziraat_dataBase_kayit, name="register_ziraat_dataBase_kayit"),
+
+    # defter bilgilerini listeleme
     path('defter_onay_list', views.defter_onay_list_view, name="defter_onay_list"),         # onay bilgileri listeleme
-    path('ziraat_defter_list_view', views.ziraat_defter_list_view, name="ziraat_defter_list_view"), # ziraat defteri kayit bilgileri listeleme
+    path('defter_ziraat_list', views.defter_ziraat_list_view, name="defter_ziraat_list"),             # ziraat defteri kayit bilgileri listeleme
 
 
     path('onay_list_delete/<int:id>',views.onay_list_delete_view, name="onay_list_delete"), #burda id almamiz gerek
@@ -36,7 +41,10 @@ urlpatterns = [
 
     path('onay_delete/<int:file_id>/', views.onay_delete_view, name='onay_delete'),
     path('onay_download/<int:file_id>/', views.onay_download_view, name='onay_download'),
-    path('register_onay_dataBase_kayit', views.register_onay_dataBase_kayit, name="register_onay_dataBase_kayit"),
+
+
+    
+
     path('edit_onay_bilgi/<int:id>/', views.edit_onay_bilgi, name='edit_onay_bilgi'),
 
     path('defter_onay_list/', views.filter_onay_list, name="filter_onay_list"),

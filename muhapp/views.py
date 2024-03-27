@@ -15,7 +15,7 @@ from datetime import datetime
 from django.utils import timezone
 import datetime
 
-#-------------------------------------------------------------------------------------------------------------------------- Ana Sayfa 
+#---------------------------------------------------------------------------------------------------------------------------- Ana Sayfa 
 class MainView(TemplateView):
     template_name = 'muhapp/main.html'
     def get_context_data(self, **kwargs):
@@ -44,13 +44,13 @@ class MainView(TemplateView):
     }
         
         return context
-#---------------------------------------------------------------------------------------------------------------------------- SignUp
+#------------------------------------------------------------------------------------------------------------- SignUp
 class SignUpView(CreateView):
     form_class = UserCreationForm
     success_url = reverse_lazy("login")
     template_name = "registration/signup.html"
 
-#----------------------------------------------------------------------------------------------------------------- Onay Yukleme View 
+#------------------------------------------------------------------------------------------------------------- Onay Yukleme View 
 def onay_upload_view(request):
     if request.method == 'POST':
         uploaded_file = request.FILES.get('file')
@@ -68,18 +68,18 @@ def onay_upload_view(request):
         # POST isteği dışında gelen isteklere hata yanıtı
         return JsonResponse({'error': 'Geçersiz istek yöntemi.'}, status=405)
     
-#--------------------------------------------------------------------------------------------------------------- Onay sayfada gosterme 
+#------------------------------------------------------------------------------------------------------------- Onay sayfada gosterme 
 def onay_list_view(request):
     files = models.OnayUploadedModel.objects.all()  # models.py'deki modele göre
     return render(request, 'muhapp/onaylar.html', {'files': files})   
 
-#----------------------------------------------------------------------------------------------------- Onay belgelerini sayfadan silme 
+#------------------------------------------------------------------------------------------------------------- Onay belgelerini sayfadan silme 
 def onay_delete_view(request, file_id):
     file_to_delete = get_object_or_404(models.OnayUploadedModel, id=file_id)
     file_to_delete.delete()
     return redirect('muhapp:onay_list')
 
-#--------------------------------------------------------------------------------------------------------------- Onay belgele indirme
+#------------------------------------------------------------------------------------------------------------- Onay belgele indirme
 def onay_download_view(request, file_id):
     file_instance = get_object_or_404(models.OnayUploadedModel, id=file_id)
     file_path = file_instance.file.path
@@ -101,19 +101,19 @@ def onay_download_view(request, file_id):
 
 
 # ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++     Defterler
-#---------------------------------------------------------------------------------------------------------- Kayit Defterleri 1. sayfasi
+#------------------------------------------------------------------------------------------------------------- Kayit Defterleri 1. sayfasi
 class Belge_Kayit_View(TemplateView):
     template_name = 'muhapp/defterler.html'
 
-#----------------------------------------------------------------------------------------- Ziraat Bankasi Talimat Kayit Defteri sayfasi
+#------------------------------------------------------------------------------------------------------------- Ziraat Bankasi Talimat Kayit Defteri sayfasi
 class Ziraat_Kayit_View(TemplateView):
     template_name = 'muhapp/defter_ziraat.html'
 
-#------------------------------------------------------------------------------------------ Demirbank Talimat Duz Kayit Defteri sayfasi
+#------------------------------------------------------------------------------------------------------------- Demirbank Talimat Duz Kayit Defteri sayfasi
 class Demir_Duz_Kayit_View(TemplateView):
     template_name = 'muhapp/defter_dbank_duz.html'
 
-#------------------------------------------------------------------------------------------- Demirbank Talimat YF Kayit Defteri sayfasi
+#------------------------------------------------------------------------------------------------------------- Demirbank Talimat YF Kayit Defteri sayfasi
 class Demir_YF_Kayit_View(TemplateView):
     template_name = 'muhapp/defter_dbank_yf.html'
 # +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -124,16 +124,11 @@ class Demir_YF_Kayit_View(TemplateView):
 
 
 # +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++     Register views:Yeni kayit butonu
-#--------------------------------------------------------------------------------------- Onay Defter Kayit Defteri (New Window) sayfasi
 class Register_Onay_View(TemplateView):
     template_name = 'muhapp/register_onay.html'
 
 class Register_Ziraat_View(TemplateView):
     template_name = 'muhapp/register_ziraat.html'
-
-
-
-
 # +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     
 
@@ -163,9 +158,28 @@ def register_onay_dataBase_kayit(request):
         return response
     else:
         return render(request, 'muhapp/main.html')
-    
 
-
+#------------------------------------------------------------------------------------------------------------- Ziraat
+def register_ziraat_dataBase_kayit(request):
+    if request.method == 'POST':    
+        ziraat_tarih            = request.POST.get("ziraat_tarih","")
+        ziraat_firma_adi        = request.POST.get("ziraat_firma_adi","")
+        ziraat_muhasebe_belge_no = request.POST.get("ziraat_muhasebe_belge_no","")
+        ziraat_aciklama         = request.POST.get("ziraat_aciklama","")
+        ziraat_tutar            = request.POST.get("ziraat_tutar","")
+        ziraat_para_birimi      = request.POST.get("ziraat_para_birimi","")
+        models.ZiraatRegisterModel.objects.create(username                  =request.user,
+                                                  ziraat_tarih              =ziraat_tarih,
+                                                  ziraat_firma_adi          =ziraat_firma_adi,
+                                                  ziraat_muhasebe_belge_no  =ziraat_muhasebe_belge_no,
+                                                  ziraat_aciklama           =ziraat_aciklama,
+                                                  ziraat_tutar              =ziraat_tutar,
+                                                  ziraat_para_birimi        =ziraat_para_birimi,
+                                                  )
+        response = HttpResponse('<script>window.close(); window.opener.location.reload();</script>')
+        return response
+    else:
+        return render(request, 'muhapp/main.html')
 # +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 
@@ -173,21 +187,28 @@ def register_onay_dataBase_kayit(request):
 
         
 # +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++     Kaydedilen defter bilgilerini gosterme
-#----------------------------------------------------------------------------------- Onay Defteri sayfasinda bilgileri gostermek icin
+#------------------------------------------------------------------------------------------------------------- Onay Defteri sayfasinda bilgileri gostermek icin
 def defter_onay_list_view(request):
     defter_onay_list = models.OnayRegisterModel.objects.all()
     defter_onay_list = {"defter_onay_list":defter_onay_list}
     return render(request, 'muhapp/defter_onay_list.html', context=defter_onay_list)
     #return render(request, 'muhapp/defter_onay_list.html', {'onay_bilgiler': onay_bilgiler})
 
+def defter_ziraat_list_view(request):
+    defter_ziraat_list = models.ZiraatRegisterModel.objects.all()
+    defter_ziraat_list = {"defter_ziraat_list": defter_ziraat_list}
+    return render(request, 'muhapp/defter_ziraat.html', context=defter_ziraat_list )
+
+
+
+# +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 
 
 
 
 
-
-#--------------------------------------------------------------------------------------------------- Onay Defter Kayit silme
+#------------------------------------------------------------------------------------------------------------- Onay Defter Kayit silme
 @login_required
 def onay_list_delete_view(request, id):
     onay_bilgi = models.OnayRegisterModel.objects.get(pk=id)
@@ -293,8 +314,5 @@ def ziraat_list_view(request):
 #----------------------------------------------------------------------------------------------------------------- Ziraat Yuklenen begeleri indirme   
 #----------------------------------------------------------------------------------- ziraat Talimat kait Defteri sayfasinda bilgileri gostermek icin
 
-def ziraat_defter_list_view(request):
-    ziraat_defter_list_view = models.ZiraatUploadModel.objects.all()
-    ziraat_defter_list_view = {"ziraat_defter_list_view":ziraat_defter_list_view}
-    return render(request, 'muhapp/defter_ziraat.html', context=ziraat_defter_list_view)
+
 
