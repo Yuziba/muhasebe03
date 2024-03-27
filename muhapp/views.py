@@ -195,10 +195,11 @@ def defter_onay_list_view(request):
     #return render(request, 'muhapp/defter_onay_list.html', {'onay_bilgiler': onay_bilgiler})
 
 def defter_ziraat_list_view(request):
-    defter_ziraat_list = models.ZiraatRegisterModel.objects.all()
-    defter_ziraat_list = {"defter_ziraat_list": defter_ziraat_list}
-    return render(request, 'muhapp/defter_ziraat.html', context=defter_ziraat_list )
-
+    defter_ziraat = models.ZiraatRegisterModel.objects.all()
+    defter_ziraat = {"defter_ziraat": defter_ziraat}
+    #print("Ssssssssssssssss") kontrol amacli
+    return render(request, 'muhapp/defter_ziraat.html', context=defter_ziraat)
+    #return render(request, 'muhapp/defter_ziraat.html', {'defter_ziraat_list': defter_ziraat})
 
 
 # +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
