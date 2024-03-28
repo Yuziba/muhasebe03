@@ -51,12 +51,13 @@
         <div class="card">
             <div class="" style="display: flex; text-align:center; align-items: center; background-color: #acdcf8; text-align: center; font-weight: bolder; height: 60px;">
                 <div class="" style="width: 3%; padding: 6px;">Sıra</div>
-                <div class="" style="width: 6%; padding: 6px; border-radius: 6px;">Tarih</div> 
+                <div class="" style="width: 6%; padding: 6px; border-radius: 6px;">Tarih</div>
+                <div class="" style="width: 6%; padding: 6px;">Firma Adı</div>
+                <div class="" style="width: 5%; padding: 6px; border-radius: 6px;">SGB Belge No</div>
                 <div class="" style="width: 56%; padding: 6px;">Açıklama</div> 
-                <div class="" style="width: 10%; padding: 6px; border-radius: 6px;">Ödenecek Tutar</div>
+                <div class="" style="width: 8%; padding: 6px; border-radius: 6px;">Ödenecek Tutar</div>
                 <div class="" style="width: 4%; padding: 6px;">Birim</div>
-                <div class="" style="width: 6%; padding: 6px; border-radius: 6px;">Ödeme Yolu</div>   
-                <div class="" style="width: 9%; padding: 6px;">SGB Belge No</div> <!--belge no-->
+                <!-- Ziraat oldugu icin odeme yolunu secmeye gerek yok-->   
                 <div class="" style="width: 2%; display:flex; flex-direction: column;">Edit</div>
                 <div class="" style="width: 4%;">Yazar</div>
             </div>
@@ -70,9 +71,9 @@
 
                 <div class="" style="width: 6%; background-color: #e6f1f7; padding: 6px; border-radius: 6px;">{{ziraat.ziraat_tarih|date:"d.m.Y"}}</div> 
 
-                <div class="" style="width: 3%; background-color: #f1f8fc; padding: 6px;">{{ziraat.ziraat_firma_adi}}</div>
+                <div class="" style="width: 6%; background-color: #f1f8fc; padding: 6px;">{{ziraat.ziraat_firma_adi}}</div>
 
-                <div class="" style="width: 3%; background-color: #f1f8fc; padding: 6px;">{{ziraat.ziraat_muhasebe_belge_no}}</div>
+                <div class="" style="width: 5%; background-color: #f1f8fc; padding: 6px;">{{ziraat.ziraat_muhasebe_belge_no}}</div>
 
                 <div class="" style="width: 56%; background-color: #f1f8fc; padding: 6px;">
                     {% if ziraat.ziraat_aciklama %}
@@ -82,7 +83,7 @@
                     {% endif %}
                 </div> 
 
-                <div class="formatted-div-odemetutar" style="width: 10%; background-color: #e6f1f7; padding: 6px; border-radius: 6px; text-align: right;">{{ziraat.ziraat_tutar|floatformat:"2"|default:"0.00"|intcomma}}</div>
+                <div class="formatted-div-odemetutar" style="width: 8%; background-color: #e6f1f7; padding: 6px; border-radius: 6px; text-align: right;">{{ziraat.ziraat_tutar|floatformat:"2"|default:"0.00"|intcomma}}</div>
 
                 <div class="" style="width: 4%; background-color: #f1f8fc; padding: 6px;">{{ziraat.ziraat_para_birimi}}</div>
                 
@@ -130,7 +131,7 @@
             </div>      
                     
         </div>
-        <div class="" style="width: 4%; font-size: 12px;">{{user.username}}</div>
+        
     {%endfor%}
 <!-- kontrol icin 
 <a href="{% url 'muhapp:defter_ziraat' %}">Defter Ziraat Listesi</a>
