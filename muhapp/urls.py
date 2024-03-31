@@ -28,8 +28,9 @@ urlpatterns = [
     path('defter_onay_list', views.defter_onay_list_view, name="defter_onay_list"),         # onay bilgileri listeleme
     path('defter_ziraat/', views.defter_ziraat_list_view, name="defter_ziraat"),             # ziraat defteri kayit bilgileri listeleme
     
-
+    # Defterden kayit silme
     path('onay_list_delete/<int:id>',views.onay_list_delete_view, name="onay_list_delete"), #burda id almamiz gerek
+    path('ziraat_delete/<int:id>',views.ziraat_delete_view, name="ziraat_delete"),
 
     # belge yuklemeler
     path('onay_upload/', views.onay_upload_view, name="onay_upload"),

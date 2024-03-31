@@ -71,13 +71,30 @@ def onay_upload_view(request):
 #------------------------------------------------------------------------------------------------------------- Onay sayfada gosterme 
 def onay_list_view(request):
     files = models.OnayUploadedModel.objects.all()  # models.py'deki modele göre
-    return render(request, 'muhapp/onaylar.html', {'files': files})   
+    return render(request, 'muhapp/onaylar.html', {'files': files})
 
-#------------------------------------------------------------------------------------------------------------- Onay belgelerini sayfadan silme 
+# +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++     Delete
+#------------------------------------------------------------------------------------------------------------- Belgeleri sayfadan silme 
 def onay_delete_view(request, file_id):
     file_to_delete = get_object_or_404(models.OnayUploadedModel, id=file_id)
     file_to_delete.delete()
     return redirect('muhapp:onay_list')
+
+#------------------------------------------------------------------------------------------------------------- Defter Kayit silme
+@login_required
+def onay_list_delete_view(request, id):
+    onay_bilgi = models.OnayRegisterModel.objects.get(pk=id)
+    if request.user == onay_bilgi.username:                      #kontrol
+        models.OnayRegisterModel.objects.filter(id=id).delete() #silme kodu
+        return redirect('muhapp:defter_onay_list')                 #yonlendirme *ayni sayfa
+   
+@login_required
+def ziraat_delete_view(request,id):
+    ziraat_bilgi = models.ZiraatRegisterModel.objects.get(pk=id)
+    if request.user == ziraat_bilgi.username:
+        models.ZiraatRegisterModel.objects.filter(id=id).delete()
+        return redirect('muhapp:defter_ziraat')
+
 
 #------------------------------------------------------------------------------------------------------------- Onay belgele indirme
 def onay_download_view(request, file_id):
@@ -117,12 +134,8 @@ class Demir_Duz_Kayit_View(TemplateView):
 class Demir_YF_Kayit_View(TemplateView):
     template_name = 'muhapp/defter_dbank_yf.html'
 # +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
-
-
-
-
-
+# +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+# +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 # +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++     Register views:Yeni kayit butonu
 class Register_Onay_View(TemplateView):
     template_name = 'muhapp/register_onay.html'
@@ -130,10 +143,8 @@ class Register_Onay_View(TemplateView):
 class Register_Ziraat_View(TemplateView):
     template_name = 'muhapp/register_ziraat.html'
 # +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-    
-
-
-
+# +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++    
+# +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 # +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++     Register views:Veritabanina kaydetme
 
 def register_onay_dataBase_kayit(request):
@@ -181,11 +192,8 @@ def register_ziraat_dataBase_kayit(request):
     else:
         return render(request, 'muhapp/main.html')
 # +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
-
-
-
-        
+# +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+# +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++        
 # +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++     Kaydedilen defter bilgilerini gosterme
 #------------------------------------------------------------------------------------------------------------- Onay Defteri sayfasinda bilgileri gostermek icin
 def defter_onay_list_view(request):
@@ -209,13 +217,6 @@ def defter_ziraat_list_view(request):
 
 
 
-#------------------------------------------------------------------------------------------------------------- Onay Defter Kayit silme
-@login_required
-def onay_list_delete_view(request, id):
-    onay_bilgi = models.OnayRegisterModel.objects.get(pk=id)
-    if request.user == onay_bilgi.username:                      #kontrol
-        models.OnayRegisterModel.objects.filter(id=id).delete() #silme kodu
-        return redirect('muhapp:defter_onay_list')                 #yonlendirme *ayni sayfa
 
 
 #--------------------------------------------------------------------------------------------------- Onay Defter Kayit Editleme
