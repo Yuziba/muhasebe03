@@ -135,15 +135,13 @@ class Demir_YF_Kayit_View(TemplateView):
     template_name = 'muhapp/defter_dbank_yf.html'
 # +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 # +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-# +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 # +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++     Register views:Yeni kayit butonu
 class Register_Onay_View(TemplateView):
     template_name = 'muhapp/register_onay.html'
 
 class Register_Ziraat_View(TemplateView):
     template_name = 'muhapp/register_ziraat.html'
-# +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-# +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++    
+# +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++   
 # +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 # +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++     Register views:Veritabanina kaydetme
 
@@ -192,10 +190,9 @@ def register_ziraat_dataBase_kayit(request):
     else:
         return render(request, 'muhapp/main.html')
 # +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-# +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 # +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++        
 # +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++     Kaydedilen defter bilgilerini gosterme
-#------------------------------------------------------------------------------------------------------------- Onay Defteri sayfasinda bilgileri gostermek icin
+
 def defter_onay_list_view(request):
     defter_onay_list = models.OnayRegisterModel.objects.all()
     defter_onay_list = {"defter_onay_list":defter_onay_list}
@@ -247,7 +244,11 @@ def edit_onay_bilgi(request, id):
     
 
 
-#--------------------------------------------------------------------------------------------------- belirli bi tarhteki toplam odeme tutarini gosterme
+# +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+# +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+# +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++        
+# +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++     Defter bilgileri ekrani filtreleme
+# --- Onay
 def filter_onay_list(request):
     onay_tarih = request.GET.get('onay_tarih_filter')
     onay_parabirimi = request.GET.get('onay_parabirimi_filter')
@@ -262,6 +263,19 @@ def filter_onay_list(request):
     }
     
     return render(request, 'muhapp/defter_onay_list.html', context)
+
+# --- Ziraat
+def filter_ziraat_list(request):
+    ziraat_tarih = request.GET.get('ziraat_tarih_filter') #defter_ziraat htmlde input un nama alani
+    ziraat_parabirimi = request.GET.get('ziraat_parabirimi_filter')
+    my_ziraat_fltered_data = models.ZiraatRegisterModel.objects.filter(ziraat_tarih=ziraat_tarih, ziraat_para_birimi=ziraat_parabirimi) #modeldeki ziraat para birimi: burdaki dagisken olan zirat para birimi
+    ziraat_toplam_tutar = models.ZiraatRegisterModel.objects.filter(ziraat_tarih=ziraat_tarih).aggregate(ziraat_toplam_tutar=Sum('ziraat_tutar'))['ziraat_toplam_tutar']
+    context = {
+        'filtered_data': my_ziraat_fltered_data,
+        'toplam_tutar': ziraat_toplam_tutar #burdaki toplam_tutar ile htmlde jinja ile degeri alabiliriz
+    }
+    return render(request, 'muhapp/defter_ziraat.html', context)
+
 
 #--------------------------------------------------------------------------------------------------- o gunku  toplam odeme tutarini anasayfada gosterme
 

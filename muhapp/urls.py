@@ -48,7 +48,11 @@ urlpatterns = [
 
     path('edit_onay_bilgi/<int:id>/', views.edit_onay_bilgi, name='edit_onay_bilgi'),
 
+    # defter kayit alaninda Fltreleme
     path('defter_onay_list/', views.filter_onay_list, name="filter_onay_list"),
+    path('ziraat_onay_list/', views.filter_ziraat_list, name="filter_ziraat_list"),
+
+    
     path('deneme/',views.deneme, name="deneme"),
 
 ]
