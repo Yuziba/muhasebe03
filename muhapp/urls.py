@@ -10,6 +10,8 @@ urlpatterns = [
     path('defterler/', views.Belge_Kayit_View.as_view(), name="defterler"),                 #Defterlerin Ana Sayfasi
     path('signup/', views.SignUpView.as_view(), name='signup'), 
     #path('defter_onay_list', views.Onay_Kayit_View.as_view(), name="defter_onay_list"),    #Onay Belgesi Defteri sayfasi
+
+    
     path('defter_ziraat', views.Ziraat_Kayit_View.as_view(), name="defter_ziraat"),         #Ziraat Belgesi Defteri sayfasi
     path('defter_dbank_duz', views.Demir_Duz_Kayit_View.as_view(), name="defter_dbank_duz"),#Demir Belgesi Defteri sayfasi
     path('defter_dbank_yf', views.Demir_YF_Kayit_View.as_view(), name="defter_dbank_yf"),   #Demir Belgesi Defteri sayfasi
