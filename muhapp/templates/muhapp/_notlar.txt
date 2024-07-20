@@ -16,3 +16,7 @@ class OdemeDurumuForm(forms.ModelForm):
 ---------------------------------------------- radio buton html
 <div><input type="radio" name="OdemDurumu_{{ forloop.counter }}" value="OdemDurumu"></div>
 name icinde forloop kullanmamizin nedeni isimlendirme farkli olmazsa diger radio butonlarida alip tek bi tane secmemize izin verir hale geliyor
+
+
+Kullanici: ziya
+password: Trabzon61-
